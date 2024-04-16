@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class MainMenuScreen : MonoBehaviour
+namespace SpaceInvadersMiniGame
 {
-    [SerializeField] private Canvas canvas;
-
-    public void Show()
+    public class MainMenuScreen : MonoBehaviour
     {
-        canvas.enabled = true;
-    }
+        [SerializeField] private Canvas canvas;
 
-    public void Hide()
-    {
-        canvas.enabled = false;
+        public void Show()
+        {
+            canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            canvas.enabled = false;
+        }
     }
 }

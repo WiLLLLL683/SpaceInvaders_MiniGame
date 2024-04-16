@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class GameScreen : MonoBehaviour
+namespace SpaceInvadersMiniGame
 {
-    [SerializeField] private Canvas canvas;
-
-    public void Show()
+    public class GameScreen : MonoBehaviour
     {
-        canvas.enabled = true;
-    }
+        [SerializeField] private Canvas canvas;
+        [SerializeField] private Transform playerSpawnPoint;
 
-    public void Hide()
-    {
-        canvas.enabled = false;
+        public Transform PlayerSpawnPoint => playerSpawnPoint;
+
+        public void Show()
+        {
+            canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            canvas.enabled = false;
+        }
     }
 }
