@@ -12,6 +12,13 @@ namespace SpaceInvadersMiniGame
 
         private PlayerInput input;
         private PlayerConfig config;
+        private Vector2 targetPosition;
+        private Vector2 velocity;
+
+        private void Awake()
+        {
+            targetPosition = transform.position;
+        }
 
         public void Init(PlayerInput input, PlayerConfig config)
         {
@@ -19,39 +26,61 @@ namespace SpaceInvadersMiniGame
             this.config = config;
 
             input.OnMoveInput += Move;
-            colliderUI.OnCollisionEnter += TeleportOutOfCollision;
-            colliderUI.OnCollisionStay += TeleportOutOfCollision;
+            colliderUI.OnCollisionEnter += MoveOutOfCollision;
+            colliderUI.OnCollisionStay += MoveOutOfCollision;
         }
 
         private void OnDestroy()
         {
             input.OnMoveInput -= Move;
-            colliderUI.OnCollisionEnter -= TeleportOutOfCollision;
-            colliderUI.OnCollisionStay -= TeleportOutOfCollision;
+            colliderUI.OnCollisionEnter -= MoveOutOfCollision;
+            colliderUI.OnCollisionStay -= MoveOutOfCollision;
+        }
+
+        private void Update()
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, config.SmoothTime, config.MaxSpeed);
         }
 
         private void Move(float horizontalAxis)
         {
-            float deltaX = horizontalAxis * config.MoveSpeed * Time.deltaTime;
-            transform.position += new Vector3(deltaX, 0f, 0f);
+            if (colliderUI.HaveCollisions)
+                return;
+
+            float deltaX = horizontalAxis * config.MaxSpeed * Time.deltaTime;
+            targetPosition = transform.position + new Vector3(deltaX, 0);
         }
 
-        private void TeleportOutOfCollision(ColliderUI collider)
+        private void MoveOutOfCollision(ColliderUI collider)
         {
-            Rect rect1 = colliderUI.Rect;
-            Rect rect2 = collider.Rect;
-
-            float xDelta = 0;
-            if (colliderUI.xMin > collider.Center.x)
+            float deltaX;
+            if (colliderUI.Center.x > collider.Center.x)
             {
-                xDelta = collider.xMax - colliderUI.xMin;
+                deltaX = collider.xMax - colliderUI.xMin + config.CollisionThrowBack;
             }
             else
             {
-                xDelta = collider.xMin - colliderUI.xMax;
+                deltaX = collider.xMin - colliderUI.xMax - config.CollisionThrowBack;
             }
 
-            transform.position += new Vector3(xDelta, 0);
+            float deltaY;
+            if (colliderUI.Center.y > collider.Center.y)
+            {
+                deltaY = collider.yMax - colliderUI.yMin + config.CollisionThrowBack;
+            }
+            else
+            {
+                deltaY = collider.yMin - colliderUI.yMax - config.CollisionThrowBack;
+            }
+
+            if (deltaX > deltaY)
+            {
+                targetPosition = transform.position + new Vector3(deltaX, 0);
+            }
+            else
+            {
+                targetPosition = transform.position + new Vector3(0, deltaY);
+            }
         }
     }
 }

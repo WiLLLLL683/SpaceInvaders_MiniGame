@@ -14,6 +14,7 @@ namespace CustomUIPhysics
         public float yMin => Rect.yMin + rectTransform.position.y;
         public float yMax => Rect.yMax + rectTransform.position.y;
         public Rect Rect => rectTransform.rect;
+        public bool HaveCollisions => collisions.Count > 0;
 
         public event Action<ColliderUI> OnCollisionEnter;
         public event Action<ColliderUI> OnCollisionStay;

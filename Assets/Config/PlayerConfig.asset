@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e52ede67fdc17429d0589ee438be73, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  MoveSpeed: 500
+  MaxSpeed: 5000
+  SmoothTime: 0.05
+  CollisionThrowBack: 1
