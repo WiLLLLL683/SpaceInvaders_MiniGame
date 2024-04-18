@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec42c469fb0c8e44a174e233f646395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderUI: {fileID: 2943082744942188786}
 --- !u!114 &2943082744942188786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff152ac00e33e964db5fa4acea84c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!222 &6836092576516852796
 CanvasRenderer:
   m_ObjectHideFlags: 0

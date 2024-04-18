@@ -14,10 +14,10 @@ namespace SpaceInvadersMiniGame
             this.parent = parent;
         }
 
-        public Bullet Create(Vector2 position, Vector2 direction, float speed)
+        public Bullet Create(Vector2 position, Vector2 direction, float speed, int damage)
         {
             Bullet bullet = UnityEngine.Object.Instantiate(prefab, position, Quaternion.identity, parent);
-            bullet.Init(direction, speed);
+            bullet.Init(direction, speed, damage);
             return bullet;
         }
     }

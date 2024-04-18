@@ -14,6 +14,8 @@ namespace SpaceInvadersMiniGame
         [Min(0.01f)] public float CollisionThrowBack;
         [Header("Attack")]
         [Min(0f)] public float BulletSpeed;
+        [Min(0f)] public float AttackDelay;
         public Vector2 AttackDirection;
+        [Min(0f)] public int AttackDamage;
     }
 }

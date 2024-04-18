@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9153129047997201688}
   - component: {fileID: 3257754369698872930}
   - component: {fileID: 4948312431493067273}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LeftBound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff152ac00e33e964db5fa4acea84c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1017382742242397202
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +258,7 @@ GameObject:
   - component: {fileID: 1947074647280336160}
   - component: {fileID: 3160670656518824207}
   - component: {fileID: 7299174303506725103}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: RightBound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,6 +335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff152ac00e33e964db5fa4acea84c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1841594798178384644
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +386,7 @@ GameObject:
   - component: {fileID: 5498010750156997049}
   - component: {fileID: 8095550532816144326}
   - component: {fileID: 7169850072315778983}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: UpBound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,6 +463,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff152ac00e33e964db5fa4acea84c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &2770133635077272661
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +478,7 @@ GameObject:
   - component: {fileID: 1250778994869923964}
   - component: {fileID: 4502590622779851113}
   - component: {fileID: 224367539411301145}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DownBound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,6 +555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff152ac00e33e964db5fa4acea84c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collideWith:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4692574675733095801
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,7 +567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132611546002974284}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}

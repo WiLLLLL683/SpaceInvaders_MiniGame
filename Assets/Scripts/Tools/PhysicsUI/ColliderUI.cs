@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ExtensionMethods;
 
 namespace CustomUIPhysics
 {
     [RequireComponent(typeof(RectTransform))]
     public class ColliderUI : MonoBehaviour
     {
+        [SerializeField] private LayerMask collideWith;
+
         public Vector2 Center => Rect.center + (Vector2)rectTransform.position;
         public float xMin => Rect.xMin + rectTransform.position.x;
         public float xMax => Rect.xMax + rectTransform.position.x;
@@ -47,13 +50,13 @@ namespace CustomUIPhysics
             physicsUI.DeRegister(this);
         }
 
-        public bool IsCollidingWith(IEnumerable<ColliderUI> colliders)
+        public bool IsCollidingWith(List<ColliderUI> colliders)
         {
             int collisionsCount = 0;
 
-            foreach (var collider in colliders)
+            for (int i = 0; i < colliders.Count; i++)
             {
-                if (IsCollidingWith(collider))
+                if (IsCollidingWith(colliders[i]))
                 {
                     collisionsCount++;
                 }
@@ -65,6 +68,9 @@ namespace CustomUIPhysics
         public bool IsCollidingWith(ColliderUI collider)
         {
             if (collider == this)
+                return false;
+
+            if (!collideWith.IsInLayerMask(collider.gameObject))
                 return false;
 
             bool isColliding = (xMin < collider.xMax &&

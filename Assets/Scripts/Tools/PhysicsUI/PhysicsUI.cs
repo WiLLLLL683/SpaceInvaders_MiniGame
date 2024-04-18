@@ -7,7 +7,7 @@ namespace CustomUIPhysics
 {
     public class PhysicsUI : MonoBehaviour
     {
-        private HashSet<ColliderUI> colliders = new();
+        private List<ColliderUI> colliders = new();
 
         private void FixedUpdate()
         {
@@ -16,6 +16,9 @@ namespace CustomUIPhysics
 
         public void Register(ColliderUI collider)
         {
+            if (colliders.Contains(collider))
+                return;
+
             colliders.Add(collider);
         }
 
@@ -26,9 +29,9 @@ namespace CustomUIPhysics
 
         public void CheckCollisions()
         {
-            foreach (var collider in colliders)
+            for (int i = 0; i < colliders.Count; i++)
             {
-                collider.IsCollidingWith(colliders);
+                colliders[i].IsCollidingWith(colliders);
             }
         }
     }

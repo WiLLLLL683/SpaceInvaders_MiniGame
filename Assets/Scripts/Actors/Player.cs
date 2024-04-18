@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-   public class Player : MonoBehaviour
+   public class Player : MonoBehaviour, IDamageable
     {
         [Header("Components")]
         [SerializeField] private RigidBodyUI rigidBodyUI;
@@ -14,6 +14,7 @@ namespace SpaceInvadersMiniGame
         private PlayerInput input;
         private BulletFactory bulletFactory;
         private PlayerConfig config;
+        private float attackTimer;
 
         public void Init(PlayerInput input, BulletFactory bulletFactory, PlayerConfig config)
         {
@@ -30,6 +31,19 @@ namespace SpaceInvadersMiniGame
         private void OnDestroy()
         {
             input.OnMoveInput -= Move;
+            input.OnAttackInput -= Attack;
+        }
+
+        private void Update()
+        {
+            attackTimer -= Time.deltaTime;
+            attackTimer = MathF.Max(0, attackTimer);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            //TODO
+            Debug.Log($"Player taken damage:{damage}");
         }
 
         private void Move(Vector2 direction)
@@ -42,8 +56,11 @@ namespace SpaceInvadersMiniGame
 
         private void Attack()
         {
-            //TODO attackTimer
-            bulletFactory.Create(gunPoint.position, config.AttackDirection, config.BulletSpeed);
+            if (attackTimer > 0)
+                return;
+
+            bulletFactory.Create(gunPoint.position, config.AttackDirection, config.BulletSpeed, config.AttackDamage);
+            attackTimer = config.AttackDelay;
         }
     }
 }
