@@ -9,5 +9,6 @@ namespace SpaceInvadersMiniGame
     public class PrefabConfig : ScriptableObject
     {
         public Player PlayerPrefab;
+        public Bullet BulletPrefab;
     }
 }

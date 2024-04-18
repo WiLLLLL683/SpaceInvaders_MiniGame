@@ -37,6 +37,15 @@ namespace SpaceInvadersMiniGame
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""d591da6f-7277-44fb-930d-fe02644127db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -204,6 +213,28 @@ namespace SpaceInvadersMiniGame
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93f28723-3b37-4ea0-81ee-e4814b5f9322"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6994c405-55bc-4842-a2f5-7ef170871884"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -213,6 +244,7 @@ namespace SpaceInvadersMiniGame
             // MiniGame
             m_MiniGame = asset.FindActionMap("MiniGame", throwIfNotFound: true);
             m_MiniGame_Movement = m_MiniGame.FindAction("Movement", throwIfNotFound: true);
+            m_MiniGame_Attack = m_MiniGame.FindAction("Attack", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -275,11 +307,13 @@ namespace SpaceInvadersMiniGame
         private readonly InputActionMap m_MiniGame;
         private List<IMiniGameActions> m_MiniGameActionsCallbackInterfaces = new List<IMiniGameActions>();
         private readonly InputAction m_MiniGame_Movement;
+        private readonly InputAction m_MiniGame_Attack;
         public struct MiniGameActions
         {
             private @InputActions m_Wrapper;
             public MiniGameActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_MiniGame_Movement;
+            public InputAction @Attack => m_Wrapper.m_MiniGame_Attack;
             public InputActionMap Get() { return m_Wrapper.m_MiniGame; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -292,6 +326,9 @@ namespace SpaceInvadersMiniGame
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
 
             private void UnregisterCallbacks(IMiniGameActions instance)
@@ -299,6 +336,9 @@ namespace SpaceInvadersMiniGame
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Attack.started -= instance.OnAttack;
+                @Attack.performed -= instance.OnAttack;
+                @Attack.canceled -= instance.OnAttack;
             }
 
             public void RemoveCallbacks(IMiniGameActions instance)
@@ -319,6 +359,7 @@ namespace SpaceInvadersMiniGame
         public interface IMiniGameActions
         {
             void OnMovement(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
         }
     }
 }

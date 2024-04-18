@@ -32,7 +32,7 @@ namespace CustomUIPhysics
             colliderUI.OnCollisionStay -= MoveOutOfCollision;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
         }

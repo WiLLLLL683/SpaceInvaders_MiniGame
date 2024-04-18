@@ -15,11 +15,13 @@ namespace SpaceInvadersMiniGame
         [SerializeField] private PlayerConfig playerConfig;
 
         private PlayerFactory playerFactory;
+        private BulletFactory bulletFactory;
 
         public void Launch()
         {
             //Initialize
-            playerFactory = new(prefabConfig.PlayerPrefab, gameScreen.PlayerSpawnPoint, playerInput, playerConfig);
+            bulletFactory = new(prefabConfig.BulletPrefab, gameScreen.BulletParent);
+            playerFactory = new(prefabConfig.PlayerPrefab, gameScreen.PlayerSpawnPoint, playerInput, bulletFactory, playerConfig);
 
             StartGame();
         }

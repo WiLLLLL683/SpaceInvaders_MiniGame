@@ -6,8 +6,10 @@ namespace SpaceInvadersMiniGame
     {
         [SerializeField] private Canvas canvas;
         [SerializeField] private Transform playerSpawnPoint;
+        [SerializeField] private Transform bulletParent;
 
         public Transform PlayerSpawnPoint => playerSpawnPoint;
+        public Transform BulletParent => bulletParent;
 
         public void Show()
         {
