@@ -28,10 +28,11 @@ namespace SpaceInvadersMiniGame
             input.OnMoveInput -= Move;
         }
 
-        private void Move(float horizontalAxis)
+        private void Move(Vector2 direction)
         {
-            float deltaX = horizontalAxis * config.MaxSpeed * Time.deltaTime;
-            var targetPosition = transform.position + new Vector3(deltaX, 0);
+            direction.y = 0;
+            Vector2 deltaPosition = direction * config.MaxSpeed * Time.deltaTime;
+            Vector2 targetPosition = (Vector2)transform.position + deltaPosition;
             rigidBodyUI.Move(targetPosition);
         }
     }

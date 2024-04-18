@@ -7,7 +7,7 @@ namespace SpaceInvadersMiniGame
 {
     public class PlayerInput : MonoBehaviour
     {
-        public event Action<float> OnMoveInput;
+        public event Action<Vector2> OnMoveInput;
 
         private InputActions actions;
 
@@ -18,10 +18,10 @@ namespace SpaceInvadersMiniGame
 
         private void Update()
         {
-            if (actions.MiniGame.HorizontalMovement.IsPressed())
+            if (actions.MiniGame.Movement.IsPressed())
             {
-                float horizontalAxis = actions.MiniGame.HorizontalMovement.ReadValue<float>();
-                OnMoveInput?.Invoke(horizontalAxis);
+                Vector2 direction = actions.MiniGame.Movement.ReadValue<Vector2>();
+                OnMoveInput?.Invoke(direction);
             }
         }
 
