@@ -12,13 +12,11 @@ namespace CustomUIPhysics
         [SerializeField, Min(0f)] private float maxSpeed;
 
         private ColliderUI colliderUI;
-        private Vector2 targetPosition;
         private Vector2 velocity;
 
         private void Awake()
         {
             colliderUI = GetComponent<ColliderUI>();
-            targetPosition = transform.position;
         }
 
         private void OnEnable()
@@ -33,11 +31,6 @@ namespace CustomUIPhysics
             colliderUI.OnCollisionStay -= MoveOutOfCollision;
         }
 
-        private void FixedUpdate()
-        {
-            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
-        }
-
         public void Init(float collisionThrowBack, float smoothTime, float maxSpeed)
         {
             this.collisionThrowBack = collisionThrowBack;
@@ -50,7 +43,7 @@ namespace CustomUIPhysics
             if (colliderUI.HaveCollisions)
                 return;
 
-            this.targetPosition = targetPosition;
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
         }
 
         private void MoveOutOfCollision(ColliderUI collider)
@@ -75,7 +68,8 @@ namespace CustomUIPhysics
                 deltaY = collider.yMin - colliderUI.yMax - collisionThrowBack;
             }
 
-            if (deltaX > deltaY)
+            Vector2 targetPosition;
+            if (Mathf.Abs(deltaX) <= Mathf.Abs(deltaY))
             {
                 targetPosition = transform.position + new Vector3(deltaX, 0);
             }
@@ -83,6 +77,8 @@ namespace CustomUIPhysics
             {
                 targetPosition = transform.position + new Vector3(0, deltaY);
             }
+
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
         }
     }
 }
