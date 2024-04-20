@@ -31,13 +31,6 @@ namespace CustomUIPhysics
             colliderUI.OnCollisionStay -= MoveOutOfCollision;
         }
 
-        public void Init(float collisionThrowBack, float smoothTime, float maxSpeed)
-        {
-            this.collisionThrowBack = collisionThrowBack;
-            this.smoothTime = smoothTime;
-            this.maxSpeed = maxSpeed;
-        }
-
         public void Move(Vector2 targetPosition)
         {
             if (colliderUI.HaveCollisions)
