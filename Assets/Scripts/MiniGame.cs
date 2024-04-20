@@ -13,7 +13,7 @@ namespace SpaceInvadersMiniGame
         [Header("Config")]
         [SerializeField] private PrefabConfig prefabConfig;
         [SerializeField] private PlayerConfig playerConfig;
-        [SerializeField] private EnemyConfig defaultEnemy; 
+        [SerializeField] private EnemyConfig defaultEnemy;
         //TODO LevelConfig
 
         private PlayerFactory playerFactory;
@@ -25,7 +25,7 @@ namespace SpaceInvadersMiniGame
             //Initialize
             bulletFactory = new(prefabConfig.BulletPrefab, gameScreen.BulletParent);
             playerFactory = new(prefabConfig.PlayerPrefab, gameScreen.PlayerSpawnPoint, playerInput, bulletFactory, playerConfig);
-            enemyFactory = new(gameScreen.EnemySpawnPoints, defaultEnemy);
+            enemyFactory = new(gameScreen.EnemySpawnPoints, bulletFactory, defaultEnemy);
 
             StartGame();
         }
@@ -42,7 +42,8 @@ namespace SpaceInvadersMiniGame
         {
             playerInput.Enable();
             playerFactory.Create();
-            enemyFactory.CreateDefaultEnemies();
+            enemyFactory.Create(gameScreen.EnemySpawnPoints[2], defaultEnemy);
+            //enemyFactory.CreateDefaultEnemies();
 
             mainMenuScreen.Hide();
             gameScreen.Show();

@@ -20,8 +20,8 @@ namespace SpaceInvadersMiniGame
         {
             this.input = input;
 
-            movemet = new RigidBodyMovement(transform, rigidBodyUI, config.MovementConfig);
-            attack = new AttackWithTimer(bulletFactory, gunPoint, config.AttackConfig);
+            movemet = new RigidBodyMovement(transform, rigidBodyUI, config.Movement);
+            attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
 
             input.OnMoveInput += movemet.Move;
             input.OnAttackInput += attack.Attack;

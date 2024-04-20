@@ -13,5 +13,16 @@ MonoBehaviour:
   m_Name: DefaultEnemy
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1248749260398013650, guid: d4a9ad86083103e428a5725b0fc1274b, type: 3}
-  HealthConfig:
+  Health:
     MaxHealth: 1
+  Movement:
+    Speed: {x: 5000, y: 10000}
+  Attack:
+    BulletSpeed: 500
+    Delay: 0
+    Damage: 1
+    Direction: {x: 0, y: -1}
+  AI:
+    MoveDelay: 0.5
+    MovesInOneDirection: 5
+    AttackDelay: 5

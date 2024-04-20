@@ -8,7 +8,7 @@ namespace SpaceInvadersMiniGame
     [CreateAssetMenu(fileName = "PlayerConfig", menuName = "SpaceInvaders/PlayerConfig")]
     public class PlayerConfig : ScriptableObject
     {
-        public MovementConfig MovementConfig;
-        public AttackConfig AttackConfig;
+        public MovementConfig Movement;
+        public AttackConfig Attack;
     }
 }

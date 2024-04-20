@@ -7,11 +7,13 @@ namespace SpaceInvadersMiniGame
     public class EnemyFactory
     {
         private readonly List<Transform> spawnPoints;
+        private readonly BulletFactory bulletFactory;
         private readonly EnemyConfig defaultEnemy;
 
-        public EnemyFactory(List<Transform> spawnPoints, EnemyConfig defaultEnemy)
+        public EnemyFactory(List<Transform> spawnPoints, BulletFactory bulletFactory, EnemyConfig defaultEnemy)
         {
             this.spawnPoints = spawnPoints;
+            this.bulletFactory = bulletFactory;
             this.defaultEnemy = defaultEnemy;
         }
 
@@ -32,7 +34,7 @@ namespace SpaceInvadersMiniGame
         public Enemy Create(Transform spawnPoint, EnemyConfig config)
         {
             Enemy enemy = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
-            enemy.Init(config);
+            enemy.Init(config, bulletFactory);
             return enemy;
         }
     }

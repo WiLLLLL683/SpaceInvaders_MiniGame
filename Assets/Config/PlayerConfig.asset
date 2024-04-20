@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e52ede67fdc17429d0589ee438be73, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  MovementConfig:
-    MaxSpeed: 5000
-    SmoothTime: 0.05
-    CollisionThrowBack: 1
-  AttackConfig:
+  Movement:
+    Speed: {x: 5000, y: 0}
+  Attack:
     BulletSpeed: 1500
-    AttackDelay: 0.5
-    AttackDirection: {x: 0, y: 1}
-    AttackDamage: 1
+    Delay: 0.5
+    Damage: 1
+    Direction: {x: 0, y: 1}

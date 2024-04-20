@@ -6,8 +6,8 @@ namespace SpaceInvadersMiniGame
     public class AttackConfig
     {
         [Min(0f)] public float BulletSpeed;
-        [Min(0f)] public float AttackDelay;
-        public Vector2 AttackDirection;
-        [Min(0f)] public int AttackDamage;
+        [Min(0f)] public float Delay;
+        [Min(0f)] public int Damage;
+        public Vector2 Direction;
     }
 }

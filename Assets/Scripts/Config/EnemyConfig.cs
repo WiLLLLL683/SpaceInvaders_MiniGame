@@ -7,6 +7,9 @@ namespace SpaceInvadersMiniGame
     public class EnemyConfig : ScriptableObject
     {
         public Enemy Prefab;
-        public HealthConfig HealthConfig;
+        public HealthConfig Health;
+        public MovementConfig Movement;
+        public AttackConfig Attack;
+        public AIConfig AI;
     }
 }
