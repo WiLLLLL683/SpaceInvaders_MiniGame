@@ -11,9 +11,10 @@ namespace SpaceInvadersMiniGame
         private readonly BulletFactory bulletFactory;
         private readonly PlayerConfig config;
 
-        public PlayerFactory(Transform spawnPoint, PlayerInput input, BulletFactory bulletFactory, PlayerConfig config)
+        public PlayerFactory(Transform spawnPoint, Transform parent, PlayerInput input, BulletFactory bulletFactory, PlayerConfig config)
         {
             this.spawnPoint = spawnPoint;
+            this.parent = parent;
             this.input = input;
             this.bulletFactory = bulletFactory;
             this.config = config;
@@ -21,7 +22,7 @@ namespace SpaceInvadersMiniGame
 
         public Player Create()
         {
-            Player player = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
+            Player player = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, parent);
             player.Init(input, bulletFactory, config);
             Register(player);
             return player;

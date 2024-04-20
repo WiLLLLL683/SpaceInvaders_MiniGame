@@ -9,14 +9,22 @@ namespace SpaceInvadersMiniGame
         public event Action OnClear;
 
         protected List<T> entities = new();
+        protected Transform parent;
 
         public void Clear()
         {
             for (int i = 0; i < entities.Count; i++)
             {
                 var entity = entities[i];
-                DeRegister(entity);
+                entity.OnKilled -= DeRegister;
                 GameObject.Destroy(entity.gameObject);
+            }
+
+            entities.Clear();
+
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                GameObject.Destroy(parent.GetChild(i).gameObject);
             }
         }
 

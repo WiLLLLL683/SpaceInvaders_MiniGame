@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7196967504051307777, guid: a9dbde620e5f0fd4ebf712ee45aa7ad9, type: 3}
+  Health:
+    MaxHealth: 1
   Movement:
     Speed: {x: 5000, y: 0}
   Attack:

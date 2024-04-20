@@ -6,8 +6,6 @@ namespace SpaceInvadersMiniGame
 {
     public class BulletFactory : KillableFactoryBase<Bullet>
     {
-        private readonly Transform parent;
-
         public BulletFactory(Transform parent)
         {
             this.parent = parent;
