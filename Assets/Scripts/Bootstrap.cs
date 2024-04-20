@@ -10,5 +10,17 @@ public class Bootstrap : MonoBehaviour
     private void Awake()
     {
         miniGame.Enable();
+        miniGame.OnDisable += Quit;
+    }
+
+    private void Quit()
+    {
+        miniGame.OnDisable -= Quit;
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

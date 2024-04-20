@@ -8,13 +8,11 @@ namespace SpaceInvadersMiniGame
     {
         private readonly List<Transform> spawnPoints;
         private readonly BulletFactory bulletFactory;
-        private readonly EnemyConfig defaultEnemy;
 
-        public EnemyFactory(List<Transform> spawnPoints, BulletFactory bulletFactory, EnemyConfig defaultEnemy)
+        public EnemyFactory(List<Transform> spawnPoints, BulletFactory bulletFactory)
         {
             this.spawnPoints = spawnPoints;
             this.bulletFactory = bulletFactory;
-            this.defaultEnemy = defaultEnemy;
         }
 
         public List<Enemy> CreateLevelEnemies(LevelConfig level)
@@ -24,19 +22,6 @@ namespace SpaceInvadersMiniGame
             for (int i = 0; i < level.Enemies.Count && i < spawnPoints.Count; i++)
             {
                 Enemy enemy = Create(level.Enemies[i], spawnPoints[i]);
-                enemies.Add(enemy);
-            }
-
-            return enemies;
-        }
-
-        public List<Enemy> CreateDefaultEnemies()
-        {
-            List<Enemy> enemies = new();
-
-            for (int i = 0; i < spawnPoints.Count; i++)
-            {
-                Enemy enemy = Create(defaultEnemy, spawnPoints[i]);
                 enemies.Add(enemy);
             }
 

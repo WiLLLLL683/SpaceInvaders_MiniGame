@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,78 +8,78 @@ namespace SpaceInvadersMiniGame
     public class MiniGame : MonoBehaviour
     {
         [Header("Components")]
-        [SerializeField] private MainMenuScreen mainMenuScreen;
         [SerializeField] private GameScreen gameScreen;
         [SerializeField] private PlayerInput playerInput;
         [Header("Config")]
         [SerializeField] private PlayerConfig playerConfig;
         [SerializeField] private List<LevelConfig> levels = new();
-        [SerializeField] private EnemyConfig defaultEnemy;
-        //TODO LevelConfig
+
+        public event Action OnEnable;
+        public event Action OnDisable;
 
         private PlayerFactory playerFactory;
         private BulletFactory bulletFactory;
         private EnemyFactory enemyFactory;
-
-        //game state
-        private int currentLevelIndex;
+        private MiniGameState state;
 
         public void Enable()
         {
-            //Initialize
             bulletFactory = new(gameScreen.BulletParent);
             playerFactory = new(gameScreen.PlayerSpawnPoint, playerInput, bulletFactory, playerConfig);
-            enemyFactory = new(gameScreen.EnemySpawnPoints, bulletFactory, defaultEnemy);
+            enemyFactory = new(gameScreen.EnemySpawnPoints, bulletFactory);
+            state = new();
 
-            StartLevel(0);
+            StartNewGame();
+            OnEnable?.Invoke();
         }
 
         public void Disable()
         {
-            //TODO
-        }
-
-        public void OpenMainMenu()
-        {
             CleanUp();
-
             playerInput.Disable();
-
             gameScreen.Hide();
-            mainMenuScreen.Show();
+            OnDisable?.Invoke();
         }
 
+        public void StartNewGame() => StartLevel(0);
         public void StartLevel(int index)
         {
             CleanUp();
-
             playerInput.Enable();
             playerFactory.Create();
             enemyFactory.CreateLevelEnemies(levels[index]);
-
-            mainMenuScreen.Hide();
             gameScreen.Show();
-        }
 
-        public void StartNextLevel()
-        {
-            currentLevelIndex++;
-
-            if (currentLevelIndex < levels.Count)
-            {
-                StartLevel(currentLevelIndex);
-            }
-            else
-            {
-                OpenMainMenu();
-            }
+            playerFactory.OnClear += Lose;
+            enemyFactory.OnClear += LevelCleared;
         }
 
         private void CleanUp()
         {
+            playerFactory.OnClear -= Lose;
+            enemyFactory.OnClear -= LevelCleared;
+
             enemyFactory.Clear();
             playerFactory.Clear();
             bulletFactory.Clear();
+        }
+
+        //Game logic
+        private void Win() => Disable();
+        private void Lose() => StartNewGame();
+        private void LevelCleared()
+        {
+            state.CurrentLevelIndex++;
+            bool allLevelsCleared = state.CurrentLevelIndex >= levels.Count;
+
+            if (allLevelsCleared)
+            {
+                Win();
+            }
+            else
+            {
+                StartLevel(state.CurrentLevelIndex);
+            }
         }
     }
 }

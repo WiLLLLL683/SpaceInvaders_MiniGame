@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collideWith:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 896
 --- !u!222 &6836092576516852796
 CanvasRenderer:
   m_ObjectHideFlags: 0
