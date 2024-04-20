@@ -16,6 +16,7 @@ namespace SpaceInvadersMiniGame
 
         public event Action OnEnable;
         public event Action OnDisable;
+        public event Action<LevelConfig> OnLevelStarted;
 
         private PlayerFactory playerFactory;
         private BulletFactory bulletFactory;
@@ -27,6 +28,7 @@ namespace SpaceInvadersMiniGame
             bulletFactory = new(gameScreen.BulletParent);
             playerFactory = new(gameScreen.PlayerSpawnPoint, gameScreen.PlayerParent, playerInput, bulletFactory, playerConfig);
             enemyFactory = new(gameScreen.EnemySpawnPoints, gameScreen.EnemiesParent, bulletFactory);
+            gameScreen.Init(this);
 
             StartNewGame();
             OnEnable?.Invoke();
@@ -36,7 +38,6 @@ namespace SpaceInvadersMiniGame
         {
             CleanUp();
             playerInput.Disable();
-            gameScreen.Hide();
             OnDisable?.Invoke();
         }
 
@@ -51,7 +52,7 @@ namespace SpaceInvadersMiniGame
             playerInput.Enable();
             playerFactory.Create();
             enemyFactory.CreateLevelEnemies(levels[index]);
-            gameScreen.Show();
+            OnLevelStarted?.Invoke(levels[index]);
 
             playerFactory.OnClear += Lose;
             enemyFactory.OnClear += LevelCleared;

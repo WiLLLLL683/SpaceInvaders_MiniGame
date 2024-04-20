@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace SpaceInvadersMiniGame
@@ -7,6 +8,7 @@ namespace SpaceInvadersMiniGame
     {
         [Header("Components")]
         [SerializeField] private Canvas canvas;
+        [SerializeField] private TMP_Text levelName;
         [Header("Parents")]
         [SerializeField] private Transform playerParent;
         [SerializeField] private Transform enemiesParent;
@@ -21,6 +23,24 @@ namespace SpaceInvadersMiniGame
         public Transform PlayerSpawnPoint => playerSpawnPoint;
         public List<Transform> EnemySpawnPoints => enemySpawnPoints;
 
+        private MiniGame miniGame;
+
+        public void Init(MiniGame miniGame)
+        {
+            this.miniGame = miniGame;
+
+            miniGame.OnEnable += Show;
+            miniGame.OnDisable += Hide;
+            miniGame.OnLevelStarted += SetLevelName;
+        }
+
+        private void OnDestroy()
+        {
+            miniGame.OnEnable -= Show;
+            miniGame.OnDisable -= Hide;
+            miniGame.OnLevelStarted -= SetLevelName;
+        }
+
         public void Show()
         {
             canvas.enabled = true;
@@ -29,6 +49,11 @@ namespace SpaceInvadersMiniGame
         public void Hide()
         {
             canvas.enabled = false;
+        }
+
+        public void SetLevelName(LevelConfig level)
+        {
+            levelName.text = level.LevelName;
         }
     }
 }
