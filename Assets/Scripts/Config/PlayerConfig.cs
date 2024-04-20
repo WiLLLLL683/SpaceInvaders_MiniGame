@@ -9,6 +9,7 @@ namespace SpaceInvadersMiniGame
     public class PlayerConfig : ScriptableObject
     {
         public Player Prefab;
+        public HealthConfig Health;
         public MovementConfig Movement;
         public AttackConfig Attack;
     }

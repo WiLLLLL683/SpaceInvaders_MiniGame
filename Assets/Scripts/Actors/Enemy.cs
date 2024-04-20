@@ -11,7 +11,7 @@ namespace SpaceInvadersMiniGame
         [SerializeField] private ColliderUI colliderUI;
         [SerializeField] private Transform gunPoint;
 
-        private IAI ai;
+        private IAiComponent ai;
         private IMovementComponent movement;
         private IAttackComponent attack;
         private IHealthComponent health;

@@ -13,6 +13,7 @@ namespace SpaceInvadersMiniGame
 
         private IMovementComponent movemet;
         private IAttackComponent attack;
+        private IHealthComponent health;
 
         private PlayerInput input;
 
@@ -22,15 +23,18 @@ namespace SpaceInvadersMiniGame
 
             movemet = new RigidBodyMovement(transform, rigidBodyUI, config.Movement);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
+            health = new BasicHealth(config.Health.MaxHealth);
 
             input.OnMoveInput += movemet.Move;
             input.OnAttackInput += attack.Attack;
+            health.OnDeath += Die;
         }
 
         private void OnDestroy()
         {
             input.OnMoveInput -= movemet.Move;
             input.OnAttackInput -= attack.Attack;
+            health.OnDeath -= Die;
         }
 
         private void Update()
@@ -38,10 +42,7 @@ namespace SpaceInvadersMiniGame
             attack.Update();
         }
 
-        public void TakeDamage(int damage)
-        {
-            //TODO
-            Debug.Log($"Player taken damage:{damage}");
-        }
+        public void TakeDamage(int damage) => health.TakeDamage(damage);
+        private void Die() => Destroy(gameObject);
     }
 }

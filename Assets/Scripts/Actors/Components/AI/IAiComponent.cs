@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public interface IAI
+    public interface IAiComponent
     {
         event Action OnAttack;
         event Action<Vector2> OnMove;

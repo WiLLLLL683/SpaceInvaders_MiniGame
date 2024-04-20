@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class BasicAI : IAI
+    public class BasicAI : IAiComponent
     {
         public event Action OnAttack;
         public event Action<Vector2> OnMove; //Vector2 - direction
