@@ -24,14 +24,14 @@ namespace SpaceInvadersMiniGame
 
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                Enemy enemy = Create(spawnPoints[i], defaultEnemy);
+                Enemy enemy = Create(defaultEnemy, spawnPoints[i]);
                 enemies.Add(enemy);
             }
 
             return enemies;
         }
 
-        public Enemy Create(Transform spawnPoint, EnemyConfig config)
+        public Enemy Create(EnemyConfig config, Transform spawnPoint)
         {
             Enemy enemy = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
             enemy.Init(config, bulletFactory);

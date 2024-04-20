@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e52ede67fdc17429d0589ee438be73, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
+  Prefab: {fileID: 7196967504051307777, guid: a9dbde620e5f0fd4ebf712ee45aa7ad9, type: 3}
   Movement:
     Speed: {x: 5000, y: 0}
   Attack:
+    BulletPrefab: {fileID: 8745659773723233135, guid: f6ff0b440d0925b4290a4eb35dc012ed, type: 3}
     BulletSpeed: 1500
     Delay: 0.5
     Damage: 1

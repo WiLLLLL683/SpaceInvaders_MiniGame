@@ -17,16 +17,15 @@ namespace SpaceInvadersMiniGame
         private bool isEnabled;
         private float moveTimer;
         private float attackTimer;
-        //private Vector2 startPosition;
+        private Vector2 startPosition;
         private Vector2 moveDirection;
-        private int movesDelta;
 
         public BasicAI(MonoBehaviour owner, ColliderUI collider, AIConfig config)
         {
             this.owner = owner;
             this.collider = collider;
             this.config = config;
-            //this.startPosition = collider.Center;
+            this.startPosition = collider.Center;
             this.moveDirection = Vector2.left;
         }
 
@@ -50,19 +49,8 @@ namespace SpaceInvadersMiniGame
             while (isEnabled)
             {
                 TryMove();
-                //TryAttack();
+                TryAttack();
                 yield return null;
-            }
-        }
-
-        private void CheckMoveDirection()
-        {
-            int movesCount = Mathf.Abs(movesDelta);
-            Debug.Log($"movesDelta = {movesDelta}, movesCount = {movesCount}, direction = {moveDirection}");
-
-            if (movesCount >= config.MovesInOneDirection)
-            {
-                moveDirection *= -1; //TODO определять направление через положение
             }
         }
 
@@ -73,10 +61,19 @@ namespace SpaceInvadersMiniGame
             if (moveTimer <= 0)
             {
                 CheckMoveDirection();
-
-                movesDelta += Mathf.RoundToInt(Mathf.Clamp(moveDirection.x, -1, 1));
                 moveTimer = config.MoveDelay;
                 OnMove?.Invoke(moveDirection);
+            }
+        }
+
+        private void CheckMoveDirection()
+        {
+            Vector2 moveDelta = (Vector2)owner.transform.position - startPosition;
+
+            if (Mathf.Abs(moveDelta.x) >= config.MaxMoveDistanceX)
+            {
+                moveDelta.y = 0;
+                moveDirection = -moveDelta.normalized;
             }
         }
 

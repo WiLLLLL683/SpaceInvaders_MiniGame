@@ -8,7 +8,7 @@ namespace SpaceInvadersMiniGame
         event Action OnAttack;
         event Action<Vector2> OnMove;
 
-        void Disable();
         void Enable();
+        void Disable();
     }
 }

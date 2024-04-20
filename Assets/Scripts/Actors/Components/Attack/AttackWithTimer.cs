@@ -23,7 +23,7 @@ namespace SpaceInvadersMiniGame
             if (attackTimer > 0)
                 return;
 
-            bulletFactory.Create(gunPoint.position, config.Direction, config.BulletSpeed, config.Damage);
+            bulletFactory.Create(config, gunPoint.position);
             attackTimer = config.Delay;
         }
 
