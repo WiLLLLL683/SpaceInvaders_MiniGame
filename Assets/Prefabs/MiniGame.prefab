@@ -105,8 +105,11 @@ MonoBehaviour:
   mainMenuScreen: {fileID: 4587188658018411850}
   gameScreen: {fileID: 4587188658141575923}
   playerInput: {fileID: 3117525348120762010}
-  prefabConfig: {fileID: 11400000, guid: 8aa8351bbac6a294fad07774cf767c40, type: 2}
   playerConfig: {fileID: 11400000, guid: 38980a485a7ceac4987269640f9af164, type: 2}
+  levels:
+  - {fileID: 11400000, guid: 63e5453d28953114299881d67ffb7ac5, type: 2}
+  - {fileID: 11400000, guid: 5fa893c8ac9aeb841b9190e3f67b73a2, type: 2}
+  - {fileID: 11400000, guid: 582665b0fca7ae049b627554bd1d59a3, type: 2}
   defaultEnemy: {fileID: 11400000, guid: 4ff0f9f7b753ece469fbc56d5b983e47, type: 2}
 --- !u!1 &7389421263939396073
 GameObject:

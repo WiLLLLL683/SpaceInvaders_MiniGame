@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class PlayerFactory
+    public class PlayerFactory : KillableFactoryBase<Player>
     {
         private readonly Transform spawnPoint;
         private readonly PlayerInput input;
@@ -23,6 +23,7 @@ namespace SpaceInvadersMiniGame
         {
             Player player = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
             player.Init(input, bulletFactory, config);
+            Register(player);
             return player;
         }
     }

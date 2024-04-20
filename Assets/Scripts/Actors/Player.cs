@@ -5,11 +5,13 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class Player : MonoBehaviour, IDamageable
+    public class Player : MonoBehaviour, IDamageable, IKillable
     {
         [Header("Components")]
         [SerializeField] private RigidBodyUI rigidBodyUI;
         [SerializeField] private Transform gunPoint;
+
+        public event Action<IKillable> OnKilled;
 
         private IMovementComponent movemet;
         private IAttackComponent attack;
@@ -27,14 +29,14 @@ namespace SpaceInvadersMiniGame
 
             input.OnMoveInput += movemet.Move;
             input.OnAttackInput += attack.Attack;
-            health.OnDeath += Die;
+            health.OnDeath += Kill;
         }
 
         private void OnDestroy()
         {
             input.OnMoveInput -= movemet.Move;
             input.OnAttackInput -= attack.Attack;
-            health.OnDeath -= Die;
+            health.OnDeath -= Kill;
         }
 
         private void Update()
@@ -43,6 +45,11 @@ namespace SpaceInvadersMiniGame
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
-        private void Die() => Destroy(gameObject);
+
+        public void Kill()
+        {
+            OnKilled?.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 }

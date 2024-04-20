@@ -5,11 +5,13 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable, IKillable
     {
         [Header("Components")]
         [SerializeField] private ColliderUI colliderUI;
         [SerializeField] private Transform gunPoint;
+
+        public event Action<IKillable> OnKilled;
 
         private IAiComponent ai;
         private IMovementComponent movement;
@@ -28,7 +30,7 @@ namespace SpaceInvadersMiniGame
 
             ai.OnAttack += attack.Attack;
             ai.OnMove += movement.Move;
-            health.OnDeath += Die;
+            health.OnDeath += Kill;
             colliderUI.OnCollisionEnter += DealDamage;
 
             ai.Enable();
@@ -40,13 +42,17 @@ namespace SpaceInvadersMiniGame
 
             ai.OnAttack -= attack.Attack;
             ai.OnMove -= movement.Move;
-            health.OnDeath -= Die;
+            health.OnDeath -= Kill;
             colliderUI.OnCollisionEnter -= DealDamage;
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
 
-        private void Die() => Destroy(gameObject);
+        public void Kill()
+        {
+            OnKilled?.Invoke(this);
+            Destroy(gameObject);
+        }
 
         private void DealDamage(ColliderUI collider)
         {

@@ -9,6 +9,6 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
-        miniGame.Launch();
+        miniGame.Enable();
     }
 }
