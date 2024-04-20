@@ -15,9 +15,12 @@ namespace SpaceInvadersMiniGame
         private IMovementComponent movement;
         private IAttackComponent attack;
         private IHealthComponent health;
+        public EnemyConfig config;
 
         public void Init(EnemyConfig config, BulletFactory bulletFactory)
         {
+            this.config = config;
+
             ai = new BasicAI(this, colliderUI, config.AI);
             movement = new BasicMovement(transform, config.Movement);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
@@ -26,6 +29,7 @@ namespace SpaceInvadersMiniGame
             ai.OnAttack += attack.Attack;
             ai.OnMove += movement.Move;
             health.OnDeath += Die;
+            colliderUI.OnCollisionEnter += DealDamage;
 
             ai.Enable();
         }
@@ -37,9 +41,19 @@ namespace SpaceInvadersMiniGame
             ai.OnAttack -= attack.Attack;
             ai.OnMove -= movement.Move;
             health.OnDeath -= Die;
+            colliderUI.OnCollisionEnter -= DealDamage;
         }
 
         public void TakeDamage(int damage) => health.TakeDamage(damage);
+
         private void Die() => Destroy(gameObject);
+
+        private void DealDamage(ColliderUI collider)
+        {
+            if (collider.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(config.Attack.Damage);
+            }
+        }
     }
 }
