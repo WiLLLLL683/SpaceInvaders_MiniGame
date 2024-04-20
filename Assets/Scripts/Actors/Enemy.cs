@@ -5,21 +5,21 @@ namespace SpaceInvadersMiniGame
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        private int health = 1;
+        private IHealthComponent health;
 
-        public void TakeDamage(int damage)
+        public void Init(EnemyConfig config)
         {
-            if (damage <= 0)
-                return;
+            health = new BasicHealth(config.HealthConfig.MaxHealth);
 
-            health -= damage;
-
-            if (health <= 0)
-            {
-                health = 0;
-                Die();
-            }
+            health.OnDeath += Die;
         }
+
+        private void OnDestroy()
+        {
+            health.OnDeath -= Die;
+        }
+
+        public void TakeDamage(int damage) => health.TakeDamage(damage);
 
         private void Die()
         {

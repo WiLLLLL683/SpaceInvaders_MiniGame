@@ -6,32 +6,33 @@ namespace SpaceInvadersMiniGame
 {
     public class EnemyFactory
     {
-        private readonly Enemy prefab;
         private readonly List<Transform> spawnPoints;
+        private readonly EnemyConfig defaultEnemy;
 
-        public EnemyFactory(Enemy prefab, List<Transform> spawnPoints)
+        public EnemyFactory(List<Transform> spawnPoints, EnemyConfig defaultEnemy)
         {
-            this.prefab = prefab;
             this.spawnPoints = spawnPoints;
+            this.defaultEnemy = defaultEnemy;
         }
 
         //TODO CreateAllFromLevel(Level level)
-        public List<Enemy> CreateAll()
+        public List<Enemy> CreateDefaultEnemies()
         {
             List<Enemy> enemies = new();
 
             for (int i = 0; i < spawnPoints.Count; i++)
             {
-                Enemy enemy = Create(spawnPoints[i]);
+                Enemy enemy = Create(spawnPoints[i], defaultEnemy);
                 enemies.Add(enemy);
             }
 
             return enemies;
         }
 
-        public Enemy Create(Transform spawnPoint)
+        public Enemy Create(Transform spawnPoint, EnemyConfig config)
         {
-            Enemy enemy = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
+            Enemy enemy = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, spawnPoint.parent);
+            enemy.Init(config);
             return enemy;
         }
     }

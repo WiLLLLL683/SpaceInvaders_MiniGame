@@ -17,7 +17,7 @@ MonoBehaviour:
     SmoothTime: 0.05
     CollisionThrowBack: 1
   AttackConfig:
-    BulletSpeed: 1000
+    BulletSpeed: 1500
     AttackDelay: 0.5
     AttackDirection: {x: 0, y: 1}
     AttackDamage: 1
