@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceInvadersMiniGame
@@ -6,9 +7,11 @@ namespace SpaceInvadersMiniGame
     {
         [SerializeField] private Canvas canvas;
         [SerializeField] private Transform playerSpawnPoint;
+        [SerializeField] private List<Transform> enemySpawnPoints;
         [SerializeField] private Transform bulletParent;
 
         public Transform PlayerSpawnPoint => playerSpawnPoint;
+        public List<Transform> EnemySpawnPoints => enemySpawnPoints;
         public Transform BulletParent => bulletParent;
 
         public void Show()

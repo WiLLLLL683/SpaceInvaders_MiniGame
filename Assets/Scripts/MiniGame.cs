@@ -16,12 +16,14 @@ namespace SpaceInvadersMiniGame
 
         private PlayerFactory playerFactory;
         private BulletFactory bulletFactory;
+        private EnemyFactory enemyFactory;
 
         public void Launch()
         {
             //Initialize
             bulletFactory = new(prefabConfig.BulletPrefab, gameScreen.BulletParent);
             playerFactory = new(prefabConfig.PlayerPrefab, gameScreen.PlayerSpawnPoint, playerInput, bulletFactory, playerConfig);
+            enemyFactory = new(prefabConfig.EnemyPrefab, gameScreen.EnemySpawnPoints);
 
             StartGame();
         }
@@ -38,6 +40,7 @@ namespace SpaceInvadersMiniGame
         {
             playerInput.Enable();
             playerFactory.Create();
+            enemyFactory.CreateAll();
 
             mainMenuScreen.Hide();
             gameScreen.Show();

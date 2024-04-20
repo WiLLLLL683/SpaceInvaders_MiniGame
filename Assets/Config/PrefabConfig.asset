@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 7196967504051307777, guid: a9dbde620e5f0fd4ebf712ee45aa7ad9, type: 3}
   BulletPrefab: {fileID: 8745659773723233135, guid: f6ff0b440d0925b4290a4eb35dc012ed, type: 3}
+  EnemyPrefab: {fileID: 1248749260398013650, guid: d4a9ad86083103e428a5725b0fc1274b, type: 3}

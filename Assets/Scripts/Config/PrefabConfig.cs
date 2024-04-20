@@ -10,5 +10,6 @@ namespace SpaceInvadersMiniGame
     {
         public Player PlayerPrefab;
         public Bullet BulletPrefab;
+        public Enemy EnemyPrefab;
     }
 }
