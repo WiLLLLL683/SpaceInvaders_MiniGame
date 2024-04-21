@@ -29,4 +29,7 @@ MonoBehaviour:
   AI:
     AttackDelay: 5
     MoveDelay: 0.5
-    MaxMoveDistanceX: 75
+    MoveInversionDelay: 1
+    BoundLayers:
+      serializedVersion: 2
+      m_Bits: 256

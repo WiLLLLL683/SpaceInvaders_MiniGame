@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using ExtensionMethods;
 
 namespace SpaceInvadersMiniGame
 {
@@ -10,6 +11,7 @@ namespace SpaceInvadersMiniGame
         public event Action OnAttack;
         public event Action<Vector2> OnMove; //Vector2 - direction
 
+        private readonly EnemiesData data;
         private readonly MonoBehaviour owner;
         private readonly ColliderUI collider;
         private readonly AIConfig config;
@@ -17,16 +19,13 @@ namespace SpaceInvadersMiniGame
         private bool isEnabled;
         private float moveTimer;
         private float attackTimer;
-        private Vector2 startPosition;
-        private Vector2 moveDirection;
 
-        public BasicAI(MonoBehaviour owner, ColliderUI collider, AIConfig config)
+        public BasicAI(EnemiesData data, MonoBehaviour owner, ColliderUI collider, AIConfig config)
         {
+            this.data = data;
             this.owner = owner;
             this.collider = collider;
             this.config = config;
-            this.startPosition = collider.Center;
-            this.moveDirection = Vector2.left;
         }
 
         public void Enable()
@@ -34,12 +33,15 @@ namespace SpaceInvadersMiniGame
             isEnabled = true;
             moveTimer = config.MoveDelay;
             attackTimer = config.AttackDelay;
-
             owner.StartCoroutine(AIBehavior());
+
+            collider.OnCollisionEnter += InvertMoveDirection;
         }
 
         public void Disable()
         {
+            collider.OnCollisionEnter -= InvertMoveDirection;
+
             isEnabled = false;
             owner.StopCoroutine(AIBehavior());
         }
@@ -60,20 +62,8 @@ namespace SpaceInvadersMiniGame
 
             if (moveTimer <= 0)
             {
-                CheckMoveDirection();
                 moveTimer = config.MoveDelay;
-                OnMove?.Invoke(moveDirection);
-            }
-        }
-
-        private void CheckMoveDirection()
-        {
-            Vector2 moveDelta = (Vector2)owner.transform.position - startPosition;
-
-            if (Mathf.Abs(moveDelta.x) >= config.MaxMoveDistanceX)
-            {
-                moveDelta.y = 0;
-                moveDirection = -moveDelta.normalized;
+                OnMove?.Invoke(data.MoveDirection);
             }
         }
 
@@ -87,6 +77,18 @@ namespace SpaceInvadersMiniGame
                 OnMove?.Invoke(Vector2.down);
                 OnAttack?.Invoke();
             }
+        }
+
+        private void InvertMoveDirection(ColliderUI collider)
+        {
+            if (!config.BoundLayers.IsInLayerMask(collider.gameObject.layer))
+                return;
+
+            if (Time.time - data.LastChangeTime <= config.MoveInversionDelay)
+                return;
+
+            data.MoveDirection *= -1;
+            data.LastChangeTime = Time.time;
         }
     }
 }

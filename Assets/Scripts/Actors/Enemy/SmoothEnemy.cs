@@ -19,11 +19,11 @@ namespace SpaceInvadersMiniGame
         private IHealthComponent health;
         private EnemyConfig config;
 
-        public override void Init(EnemyConfig config, BulletFactory bulletFactory)
+        public override void Init(EnemyConfig config, EnemiesData data, BulletFactory bulletFactory)
         {
             this.config = config;
 
-            ai = new BasicAI(this, colliderUI, config.AI);
+            ai = new BasicAI(data, this, colliderUI, config.AI);
             movement = new StepMovement(transform, config.Movement, rigidBodyUI);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
             health = new BasicHealth(config.Health.MaxHealth);

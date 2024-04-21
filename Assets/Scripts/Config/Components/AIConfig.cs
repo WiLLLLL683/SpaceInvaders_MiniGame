@@ -7,6 +7,7 @@ namespace SpaceInvadersMiniGame
     {
         [Min(0f)] public float AttackDelay;
         [Min(0f)] public float MoveDelay;
-        [Min(0f)] public float MaxMoveDistanceX;
+        [Min(0f)] public float MoveInversionDelay;
+        public LayerMask BoundLayers;
     }
 }

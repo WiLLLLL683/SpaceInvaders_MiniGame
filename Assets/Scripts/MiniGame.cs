@@ -21,13 +21,16 @@ namespace SpaceInvadersMiniGame
         private PlayerFactory playerFactory;
         private BulletFactory bulletFactory;
         private EnemyFactory enemyFactory;
-        private MiniGameState state;
+        private MiniGameData gameData;
+        private EnemiesData enemiesData;
 
         public void Enable()
         {
+            gameData = new();
+            enemiesData = new();
             bulletFactory = new(gameScreen.BulletParent);
             playerFactory = new(gameScreen.PlayerSpawnPoint, gameScreen.PlayerParent, playerInput, bulletFactory, playerConfig);
-            enemyFactory = new(gameScreen.EnemySpawnPoints, gameScreen.EnemiesParent, bulletFactory);
+            enemyFactory = new(enemiesData, gameScreen.EnemySpawnPoints, gameScreen.EnemiesParent, bulletFactory);
             gameScreen.Init(this, playerInput);
 
             StartNewGame();
@@ -43,7 +46,7 @@ namespace SpaceInvadersMiniGame
 
         public void StartNewGame()
         {
-            state = new();
+            gameData.Reset();
             StartLevel(0);
         }
         public void StartLevel(int index)
@@ -63,6 +66,7 @@ namespace SpaceInvadersMiniGame
             playerFactory.OnClear -= Lose;
             enemyFactory.OnClear -= LevelCleared;
 
+            enemiesData.Reset();
             enemyFactory.Clear();
             playerFactory.Clear();
             bulletFactory.Clear();
@@ -73,8 +77,8 @@ namespace SpaceInvadersMiniGame
         private void Lose() => StartNewGame();
         private void LevelCleared()
         {
-            state.CurrentLevelIndex++;
-            bool allLevelsCleared = state.CurrentLevelIndex >= levels.Count;
+            gameData.CurrentLevelIndex++;
+            bool allLevelsCleared = gameData.CurrentLevelIndex >= levels.Count;
 
             if (allLevelsCleared)
             {
@@ -82,7 +86,7 @@ namespace SpaceInvadersMiniGame
             }
             else
             {
-                StartLevel(state.CurrentLevelIndex);
+                StartLevel(gameData.CurrentLevelIndex);
             }
         }
     }
