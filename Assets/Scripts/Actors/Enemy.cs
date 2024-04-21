@@ -24,7 +24,7 @@ namespace SpaceInvadersMiniGame
             this.config = config;
 
             ai = new BasicAI(this, colliderUI, config.AI);
-            movement = new BasicMovement(transform, config.Movement);
+            movement = new StepMovement(transform, config.Movement);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
             health = new BasicHealth(config.Health.MaxHealth);
 

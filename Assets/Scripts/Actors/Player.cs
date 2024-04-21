@@ -23,7 +23,7 @@ namespace SpaceInvadersMiniGame
         {
             this.input = input;
 
-            movemet = new RigidBodyMovement(transform, rigidBodyUI, config.Movement);
+            movemet = new SmoothMovement(transform, rigidBodyUI, config.Movement);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
             health = new BasicHealth(config.Health.MaxHealth);
 
