@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScreen: {fileID: 4587188658141575923}
   playerInput: {fileID: 3117525348120762010}
+  gameConfig: {fileID: 11400000, guid: dd402950c2ff5c740b7d42800f12a349, type: 2}
   playerConfig: {fileID: 11400000, guid: 38980a485a7ceac4987269640f9af164, type: 2}
   levels:
   - {fileID: 11400000, guid: 63e5453d28953114299881d67ffb7ac5, type: 2}
@@ -251,18 +252,6 @@ PrefabInstance:
     - target: {fileID: 1017382742706975648, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
       propertyPath: m_Name
       value: GameScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 3934790694893813712, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3934790694893813712, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 3934790694893813712, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}

@@ -3,6 +3,7 @@ using System;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Analytics;
+using System.Collections;
 
 namespace SpaceInvadersMiniGame
 {
@@ -19,7 +20,8 @@ namespace SpaceInvadersMiniGame
             this.cont = cont;
         }
 
-        public void OnEnter(int levelIndex)
+        public void OnEnter(int levelIndex) => owner.StartCoroutine(OnEnterRoutine(levelIndex));
+        private IEnumerator OnEnterRoutine(int levelIndex)
         {
             LevelConfig currentLevel = cont.LevelsConfig[levelIndex];
 
@@ -27,11 +29,13 @@ namespace SpaceInvadersMiniGame
             cont.PlayerFactory.Create();
             cont.EnemyFactory.CreateLevelEnemies(currentLevel);
 
-            //Enable input
-            cont.Input.Enable();
-
             //Update UI
             cont.GameScreen.SetLevelName(currentLevel.LevelName);
+
+            yield return new WaitForSeconds(cont.GameConfig.DelayAfterSpawn);
+
+            //Enable input
+            cont.Input.Enable();
 
             //=>
             cont.PlayerFactory.OnClear += stateMachine.EnterState<LoseState>;

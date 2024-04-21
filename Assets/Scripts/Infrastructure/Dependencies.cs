@@ -20,6 +20,7 @@ namespace SpaceInvadersMiniGame
         public GameScreen GameScreen;
         public PlayerInput Input;
         //config
+        public MiniGameConfig GameConfig;
         public PlayerConfig PlayerConfig;
         public List<LevelConfig> LevelsConfig;
     }
