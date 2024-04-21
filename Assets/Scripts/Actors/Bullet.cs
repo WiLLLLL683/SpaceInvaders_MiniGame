@@ -4,21 +4,23 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class Bullet : MonoBehaviour, IKillable
+    public class Bullet : MonoBehaviour, IDamageable, IKillable
     {
         [SerializeField] private ColliderUI colliderUI;
 
         public event Action<IKillable> OnKilled;
 
+        private IMovementComponent movement;
+
         private Vector2 direction = Vector2.zero;
-        private float speed = 0;
         private int damage;
 
-        public void Init(Vector2 direction, float speed, int damage)
+        public void Init(Vector2 direction, float speed, float maxSpeed, int damage)
         {
             this.direction = direction;
-            this.speed = speed;
             this.damage = damage;
+
+            movement = new ContinuousMovement(transform, new() { Speed = new(speed,speed), MaxDeltaPosition = maxSpeed });
 
             colliderUI.OnCollisionEnter += DealDamage;
         }
@@ -30,8 +32,10 @@ namespace SpaceInvadersMiniGame
 
         private void FixedUpdate()
         {
-            transform.position += (Vector3)direction.normalized * speed * Time.fixedDeltaTime;
+            movement.Move(direction);
         }
+
+        public void TakeDamage(int damage) => Kill();
 
         public void Kill()
         {

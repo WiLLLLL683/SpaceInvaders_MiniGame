@@ -10,21 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d14555f17c447446a61b6ca41b6180c, type: 3}
-  m_Name: DefaultEnemy
+  m_Name: SmoothEnemy
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1248749260398013650, guid: d4a9ad86083103e428a5725b0fc1274b, type: 3}
+  Prefab: {fileID: -1681169654267743425, guid: 7878b3e42f718d84b90a45c3b57c0eae, type: 3}
   Health:
     MaxHealth: 1
   Movement:
     Speed: {x: 50, y: 100}
     MaxDeltaPosition: 100
+    Delay: 0
   Attack:
     BulletPrefab: {fileID: 8745659773723233135, guid: 9eb7337462cc34244968ebf92dd80346, type: 3}
     BulletSpeed: 500
-    Delay: 0
+    BulletMaxDeltaPosition: 100
+    CoolDown: 0
     Damage: 1
     Direction: {x: 0, y: -1}
   AI:
     AttackDelay: 5
     MoveDelay: 0.5
-    MaxMoveDistanceX: 75
+    MoveInversionDelay: 1
+    BoundLayers:
+      serializedVersion: 2
+      m_Bits: 256

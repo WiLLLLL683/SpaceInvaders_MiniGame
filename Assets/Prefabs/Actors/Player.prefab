@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a6378b77b416942a75c064ee4f76cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isKinematic: 0
   collisionThrowBack: 1
   smoothTime: 0.05
   maxSpeed: 5000
