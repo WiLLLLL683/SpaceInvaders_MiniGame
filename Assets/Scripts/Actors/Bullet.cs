@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class Bullet : MonoBehaviour, IKillable
+    public class Bullet : MonoBehaviour, IDamageable, IKillable
     {
         [SerializeField] private ColliderUI colliderUI;
 
@@ -34,6 +34,8 @@ namespace SpaceInvadersMiniGame
         {
             movement.Move(direction);
         }
+
+        public void TakeDamage(int damage) => Kill();
 
         public void Kill()
         {
