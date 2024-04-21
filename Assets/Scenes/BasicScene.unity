@@ -173,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ScaleFactor: 0.5
+  m_ReferenceResolution: {x: 1080, y: 1350}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -502,19 +502,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4587188657310848000, guid: d61a21225d4dc0144b10c9fbd4784229, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4587188657310848000, guid: d61a21225d4dc0144b10c9fbd4784229, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4587188657310848000, guid: d61a21225d4dc0144b10c9fbd4784229, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4587188657310848000, guid: d61a21225d4dc0144b10c9fbd4784229, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4587188657310848000, guid: d61a21225d4dc0144b10c9fbd4784229, type: 3}
       propertyPath: m_SizeDelta.x

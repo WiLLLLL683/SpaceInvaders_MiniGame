@@ -11,11 +11,11 @@ namespace CustomUIPhysics
     {
         [SerializeField] private LayerMask collideWith;
 
-        public Vector2 Center => Rect.center + (Vector2)rectTransform.position;
-        public float xMin => Rect.xMin + rectTransform.position.x;
-        public float xMax => Rect.xMax + rectTransform.position.x;
-        public float yMin => Rect.yMin + rectTransform.position.y;
-        public float yMax => Rect.yMax + rectTransform.position.y;
+        public Vector2 Center => rectTransform.TransformPoint(Rect.center);
+        public float xMin => rectTransform.TransformPoint(new(Rect.xMin, Rect.yMin)).x;
+        public float xMax => rectTransform.TransformPoint(new(Rect.xMax, Rect.yMax)).x;
+        public float yMin => rectTransform.TransformPoint(new(Rect.xMin, Rect.yMin)).y;
+        public float yMax => rectTransform.TransformPoint(new(Rect.xMax, Rect.yMax)).y;
         public Rect Rect => rectTransform.rect;
         public bool HaveCollisions => collisions.Count > 0;
 
@@ -26,6 +26,20 @@ namespace CustomUIPhysics
         private RectTransform rectTransform;
         private PhysicsUI physicsUI;
         private List<ColliderUI> collisions = new();
+
+        private void OnDrawGizmosSelected()
+        {
+            rectTransform = GetComponent<RectTransform>();
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(Center, 20);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(new(xMin, yMin), 10);
+            Gizmos.DrawSphere(new(xMin, yMax), 10);
+            Gizmos.DrawSphere(new(xMax, yMin), 10);
+            Gizmos.DrawSphere(new(xMax, yMax), 10);
+        }
 
         private void Awake()
         {
