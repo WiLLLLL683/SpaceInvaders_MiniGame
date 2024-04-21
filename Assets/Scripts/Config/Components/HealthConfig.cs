@@ -3,6 +3,6 @@
     [System.Serializable]
     public class HealthConfig
     {
-        public int MaxHealth;
+        public int MaxHealth = 1;
     }
 }

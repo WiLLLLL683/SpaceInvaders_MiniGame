@@ -63,6 +63,7 @@ namespace SpaceInvadersMiniGame
 
         public void SetControlsText()
         {
+            //TODO show active control scheme
             InputAction moveAction = input.Actions.MiniGame.Movement;
             string moveBindings = moveAction.GetBindingDisplayString();
             moveBindings = moveBindings.Split(" |")[0];

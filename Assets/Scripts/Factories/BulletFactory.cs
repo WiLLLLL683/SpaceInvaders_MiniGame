@@ -14,7 +14,7 @@ namespace SpaceInvadersMiniGame
         public Bullet Create(AttackConfig config, Vector2 startPosition)
         {
             Bullet bullet = UnityEngine.Object.Instantiate(config.BulletPrefab, startPosition, Quaternion.identity, parent);
-            bullet.Init(config.Direction, config.BulletSpeed, config.Damage);
+            bullet.Init(config.Direction, config.BulletSpeed, config.BulletMaxDeltaPosition, config.Damage);
             Register(bullet);
             return bullet;
         }

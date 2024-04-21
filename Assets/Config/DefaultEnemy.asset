@@ -21,6 +21,7 @@ MonoBehaviour:
   Attack:
     BulletPrefab: {fileID: 8745659773723233135, guid: 9eb7337462cc34244968ebf92dd80346, type: 3}
     BulletSpeed: 500
+    BulletMaxDeltaPosition: 100
     Delay: 0
     Damage: 1
     Direction: {x: 0, y: -1}
