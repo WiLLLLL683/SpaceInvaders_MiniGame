@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class AttackWithTimer : IAttackComponent
+    public class AttackWithCoolDown : IAttackComponent
     {
         private readonly BulletFactory bulletFactory;
         private readonly Transform gunPoint;
@@ -11,7 +11,7 @@ namespace SpaceInvadersMiniGame
 
         private float attackTimer;
 
-        public AttackWithTimer(BulletFactory bulletFactory, Transform gunPoint, AttackConfig config)
+        public AttackWithCoolDown(BulletFactory bulletFactory, Transform gunPoint, AttackConfig config)
         {
             this.bulletFactory = bulletFactory;
             this.gunPoint = gunPoint;
@@ -24,7 +24,7 @@ namespace SpaceInvadersMiniGame
                 return;
 
             bulletFactory.Create(config, gunPoint.position);
-            attackTimer = config.Delay;
+            attackTimer = config.CoolDown;
         }
 
         public void Update()
