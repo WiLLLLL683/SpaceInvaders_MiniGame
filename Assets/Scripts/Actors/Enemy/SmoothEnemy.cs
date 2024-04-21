@@ -1,30 +1,30 @@
 ﻿using CustomUIPhysics;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class Enemy : MonoBehaviour, IDamageable, IKillable
+    public class SmoothEnemy : EnemyBase
     {
         [Header("Components")]
         [SerializeField] private ColliderUI colliderUI;
+        [SerializeField] private RigidBodyUI rigidBodyUI;
         [SerializeField] private Transform gunPoint;
 
-        public event Action<IKillable> OnKilled;
+        public override event Action<IKillable> OnKilled;
 
         private IAiComponent ai;
         private IMovementComponent movement;
         private IAttackComponent attack;
         private IHealthComponent health;
-        public EnemyConfig config;
+        private EnemyConfig config;
 
-        public void Init(EnemyConfig config, BulletFactory bulletFactory)
+        public override void Init(EnemyConfig config, BulletFactory bulletFactory)
         {
             this.config = config;
 
             ai = new BasicAI(this, colliderUI, config.AI);
-            movement = new StepMovement(transform, config.Movement);
+            movement = new StepMovement(transform, config.Movement, rigidBodyUI);
             attack = new AttackWithTimer(bulletFactory, gunPoint, config.Attack);
             health = new BasicHealth(config.Health.MaxHealth);
 
@@ -46,9 +46,9 @@ namespace SpaceInvadersMiniGame
             colliderUI.OnCollisionEnter -= DealDamage;
         }
 
-        public void TakeDamage(int damage) => health.TakeDamage(damage);
+        public override void TakeDamage(int damage) => health.TakeDamage(damage);
 
-        public void Kill()
+        public override void Kill()
         {
             OnKilled?.Invoke(this);
             Destroy(gameObject);

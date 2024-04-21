@@ -7,15 +7,18 @@ namespace CustomUIPhysics
     [RequireComponent(typeof(ColliderUI))]
     public class RigidBodyUI : MonoBehaviour
     {
+        [SerializeField] private bool isKinematic;
         [SerializeField, Min(0.01f)] private float collisionThrowBack;
         [SerializeField, Min(0.01f)] private float smoothTime;
         [SerializeField, Min(0f)] private float maxSpeed;
 
         private ColliderUI colliderUI;
         private Vector2 velocity;
+        private Vector2 targetPosition;
 
         private void Awake()
         {
+            targetPosition = transform.position;
             colliderUI = GetComponent<ColliderUI>();
         }
 
@@ -31,16 +34,24 @@ namespace CustomUIPhysics
             colliderUI.OnCollisionStay -= MoveOutOfCollision;
         }
 
+        private void FixedUpdate()
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
+        }
+
         public void Move(Vector2 targetPosition)
         {
-            if (colliderUI.HaveCollisions)
+            if (!isKinematic && colliderUI.HaveCollisions)
                 return;
 
-            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
+            this.targetPosition = targetPosition;
         }
 
         private void MoveOutOfCollision(ColliderUI collider)
         {
+            if (isKinematic)
+                return;
+
             float deltaX;
             if (colliderUI.Center.x > collider.Center.x)
             {
@@ -61,7 +72,6 @@ namespace CustomUIPhysics
                 deltaY = collider.yMin - colliderUI.yMax - collisionThrowBack;
             }
 
-            Vector2 targetPosition;
             if (Mathf.Abs(deltaX) <= Mathf.Abs(deltaY))
             {
                 targetPosition = transform.position + new Vector3(deltaX, 0);
@@ -70,8 +80,6 @@ namespace CustomUIPhysics
             {
                 targetPosition = transform.position + new Vector3(0, deltaY);
             }
-
-            transform.position = Vector2.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime, maxSpeed);
         }
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class SmoothMovement : IMovementComponent
+    public class ContinuousMovement : IMovementComponent
     {
         private readonly Transform transform;
         private readonly MovementConfig config;
         private readonly RigidBodyUI rigidBodyUI;
 
-        public SmoothMovement(Transform transform, MovementConfig config, RigidBodyUI rigidBodyUI = null)
+        public ContinuousMovement(Transform transform, MovementConfig config, RigidBodyUI rigidBodyUI = null)
         {
             this.transform = transform;
             this.config = config;

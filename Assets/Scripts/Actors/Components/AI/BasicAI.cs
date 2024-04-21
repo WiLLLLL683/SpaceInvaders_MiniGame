@@ -84,8 +84,8 @@ namespace SpaceInvadersMiniGame
             if (attackTimer <= 0)
             {
                 attackTimer = config.AttackDelay;
-                OnAttack?.Invoke();
                 OnMove?.Invoke(Vector2.down);
+                OnAttack?.Invoke();
             }
         }
     }

@@ -20,7 +20,7 @@ namespace SpaceInvadersMiniGame
             this.direction = direction;
             this.damage = damage;
 
-            movement = new SmoothMovement(transform, new() { Speed = new(speed,speed), MaxDeltaPosition = maxSpeed });
+            movement = new ContinuousMovement(transform, new() { Speed = new(speed,speed), MaxDeltaPosition = maxSpeed });
 
             colliderUI.OnCollisionEnter += DealDamage;
         }
