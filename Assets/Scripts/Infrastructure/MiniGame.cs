@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CustomStateMachine;
 
 namespace SpaceInvadersMiniGame
 {
@@ -18,21 +19,24 @@ namespace SpaceInvadersMiniGame
         public event Action OnDisable;
         public event Action<LevelConfig> OnLevelStarted;
 
-        private PlayerFactory playerFactory;
-        private BulletFactory bulletFactory;
-        private EnemyFactory enemyFactory;
-        private MiniGameData gameData;
-        private EnemiesData enemiesData;
+        private StateMachine stateMachine;
+        private Dependencies container;
 
         public void Enable()
         {
-            gameData = new();
-            enemiesData = new();
-            bulletFactory = new(gameScreen.BulletParent);
-            playerFactory = new(gameScreen.PlayerSpawnPoint, gameScreen.PlayerParent, playerInput, bulletFactory, playerConfig);
-            enemyFactory = new(enemiesData, gameScreen.EnemySpawnPoints, gameScreen.EnemiesParent, bulletFactory);
-            gameScreen.Init(this, playerInput);
+            container = new()
+            {
+                GameScreen = gameScreen,
+                Input = playerInput,
+                PlayerConfig = playerConfig,
+                LevelsConfig = levels
+            };
+            stateMachine = new();
+            stateMachine.AddState(new InitState(this, container));
 
+            stateMachine.EnterState<InitState>();
+
+            //TODO переместить в стейты
             StartNewGame();
             OnEnable?.Invoke();
         }
@@ -46,30 +50,30 @@ namespace SpaceInvadersMiniGame
 
         public void StartNewGame()
         {
-            gameData.Reset();
+            container.GameData.Reset();
             StartLevel(0);
         }
         public void StartLevel(int index)
         {
             CleanUp();
             playerInput.Enable();
-            playerFactory.Create();
-            enemyFactory.CreateLevelEnemies(levels[index]);
+            container.PlayerFactory.Create();
+            container.EnemyFactory.CreateLevelEnemies(levels[index]);
             OnLevelStarted?.Invoke(levels[index]);
 
-            playerFactory.OnClear += Lose;
-            enemyFactory.OnClear += LevelCleared;
+            container.PlayerFactory.OnClear += Lose;
+            container.EnemyFactory.OnClear += LevelCleared;
         }
 
         private void CleanUp()
         {
-            playerFactory.OnClear -= Lose;
-            enemyFactory.OnClear -= LevelCleared;
+            container.PlayerFactory.OnClear -= Lose;
+            container.EnemyFactory.OnClear -= LevelCleared;
 
-            enemiesData.Reset();
-            enemyFactory.Clear();
-            playerFactory.Clear();
-            bulletFactory.Clear();
+            container.EnemiesData.Reset();
+            container.EnemyFactory.Clear();
+            container.PlayerFactory.Clear();
+            container.BulletFactory.Clear();
         }
 
         //Game logic
@@ -77,8 +81,8 @@ namespace SpaceInvadersMiniGame
         private void Lose() => StartNewGame();
         private void LevelCleared()
         {
-            gameData.CurrentLevelIndex++;
-            bool allLevelsCleared = gameData.CurrentLevelIndex >= levels.Count;
+            container.GameData.CurrentLevelIndex++;
+            bool allLevelsCleared = container.GameData.CurrentLevelIndex >= levels.Count;
 
             if (allLevelsCleared)
             {
@@ -86,7 +90,7 @@ namespace SpaceInvadersMiniGame
             }
             else
             {
-                StartLevel(gameData.CurrentLevelIndex);
+                StartLevel(container.GameData.CurrentLevelIndex);
             }
         }
     }
