@@ -8,11 +8,13 @@ namespace SpaceInvadersMiniGame
     public class InitState : IState
     {
         private readonly MiniGame owner;
+        private readonly StateMachine stateMachine;
         private readonly Dependencies cont;
 
-        public InitState(MiniGame owner, Dependencies cont)
+        public InitState(MiniGame owner, StateMachine stateMachine, Dependencies cont)
         {
             this.owner = owner;
+            this.stateMachine = stateMachine;
             this.cont = cont;
         }
 
@@ -29,6 +31,9 @@ namespace SpaceInvadersMiniGame
 
             //Init UI
             cont.GameScreen.Init(owner, cont.Input);
+
+            //=>
+            stateMachine.EnterState<StartGameState>();
         }
 
         public void OnExit()

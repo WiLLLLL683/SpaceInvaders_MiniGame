@@ -35,14 +35,12 @@ namespace SpaceInvadersMiniGame
 
             miniGame.OnEnable += Show;
             miniGame.OnDisable += Hide;
-            miniGame.OnLevelStarted += SetLevelName;
         }
 
         private void OnDestroy()
         {
             miniGame.OnEnable -= Show;
             miniGame.OnDisable -= Hide;
-            miniGame.OnLevelStarted -= SetLevelName;
         }
 
         public void Show()
@@ -56,9 +54,9 @@ namespace SpaceInvadersMiniGame
             canvas.enabled = false;
         }
 
-        public void SetLevelName(LevelConfig level)
+        public void SetLevelName(string levelName)
         {
-            levelNameText.text = level.LevelName;
+            levelNameText.text = levelName;
         }
 
         public void SetControlsText()

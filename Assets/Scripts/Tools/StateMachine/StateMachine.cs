@@ -33,6 +33,8 @@ namespace CustomStateMachine
             newState.OnEnter(payLoad);
         }
 
+        public void ExitCurrentState() => ChangeState(null);
+
         public void AddState(IExitableState state)
         {
             Type type = state.GetType();
