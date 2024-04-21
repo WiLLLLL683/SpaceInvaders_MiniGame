@@ -10,16 +10,16 @@ namespace SpaceInvadersMiniGame
         public event Action<Vector2> OnMoveInput;
         public event Action OnAttackInput;
 
-        private InputActions actions;
+        public InputActions Actions { get; private set; }
 
         private void Awake()
         {
-            actions = new();
+            Actions = new();
         }
 
         private void Update()
         {
-            if (actions.MiniGame.Movement.IsPressed())
+            if (Actions.MiniGame.Movement.IsPressed())
             {
                 MoveInput();
             }
@@ -27,21 +27,21 @@ namespace SpaceInvadersMiniGame
 
         public void Enable()
         {
-            actions.Enable();
+            Actions.Enable();
 
-            actions.MiniGame.Attack.performed += AttackInput;
+            Actions.MiniGame.Attack.performed += AttackInput;
         }
 
         public void Disable()
         {
-            actions.Disable();
+            Actions.Disable();
 
-            actions.MiniGame.Attack.performed -= AttackInput;
+            Actions.MiniGame.Attack.performed -= AttackInput;
         }
 
         private void MoveInput()
         {
-            Vector2 direction = actions.MiniGame.Movement.ReadValue<Vector2>();
+            Vector2 direction = Actions.MiniGame.Movement.ReadValue<Vector2>();
             OnMoveInput?.Invoke(direction);
         }
 

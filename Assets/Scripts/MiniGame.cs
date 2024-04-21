@@ -28,7 +28,7 @@ namespace SpaceInvadersMiniGame
             bulletFactory = new(gameScreen.BulletParent);
             playerFactory = new(gameScreen.PlayerSpawnPoint, gameScreen.PlayerParent, playerInput, bulletFactory, playerConfig);
             enemyFactory = new(gameScreen.EnemySpawnPoints, gameScreen.EnemiesParent, bulletFactory);
-            gameScreen.Init(this);
+            gameScreen.Init(this, playerInput);
 
             StartNewGame();
             OnEnable?.Invoke();

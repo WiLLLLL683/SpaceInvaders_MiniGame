@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SpaceInvadersMiniGame
 {
@@ -8,7 +9,8 @@ namespace SpaceInvadersMiniGame
     {
         [Header("Components")]
         [SerializeField] private Canvas canvas;
-        [SerializeField] private TMP_Text levelName;
+        [SerializeField] private TMP_Text levelNameText;
+        [SerializeField] private TMP_Text controlsText;
         [Header("Parents")]
         [SerializeField] private Transform playerParent;
         [SerializeField] private Transform enemiesParent;
@@ -24,10 +26,12 @@ namespace SpaceInvadersMiniGame
         public List<Transform> EnemySpawnPoints => enemySpawnPoints;
 
         private MiniGame miniGame;
+        private PlayerInput input;
 
-        public void Init(MiniGame miniGame)
+        public void Init(MiniGame miniGame, PlayerInput input)
         {
             this.miniGame = miniGame;
+            this.input = input;
 
             miniGame.OnEnable += Show;
             miniGame.OnDisable += Hide;
@@ -44,6 +48,7 @@ namespace SpaceInvadersMiniGame
         public void Show()
         {
             canvas.enabled = true;
+            SetControlsText();
         }
 
         public void Hide()
@@ -53,7 +58,18 @@ namespace SpaceInvadersMiniGame
 
         public void SetLevelName(LevelConfig level)
         {
-            levelName.text = level.LevelName;
+            levelNameText.text = level.LevelName;
+        }
+
+        public void SetControlsText()
+        {
+            InputAction moveAction = input.Actions.MiniGame.Movement;
+            string moveBindings = moveAction.GetBindingDisplayString();
+            moveBindings = moveBindings.Split(" |")[0];
+            InputAction attackAction = input.Actions.MiniGame.Attack;
+            string attackBindings = attackAction.GetBindingDisplayString();
+            attackBindings = attackBindings.Split(" |")[0];
+            controlsText.text = $"Move: {moveBindings} | Attack: {attackBindings}";
         }
     }
 }
