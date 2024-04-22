@@ -49,8 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db43abf294b2114c982d84ed3510066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: {x: -1, y: 0}
-  lastChangeTime: 0
 --- !u!1 &3639367719055302400
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,9 +157,9 @@ MonoBehaviour:
   gameConfig: {fileID: 11400000, guid: dd402950c2ff5c740b7d42800f12a349, type: 2}
   playerConfig: {fileID: 11400000, guid: 38980a485a7ceac4987269640f9af164, type: 2}
   levels:
+  - {fileID: 11400000, guid: 582665b0fca7ae049b627554bd1d59a3, type: 2}
   - {fileID: 11400000, guid: 63e5453d28953114299881d67ffb7ac5, type: 2}
   - {fileID: 11400000, guid: 5fa893c8ac9aeb841b9190e3f67b73a2, type: 2}
-  - {fileID: 11400000, guid: 582665b0fca7ae049b627554bd1d59a3, type: 2}
 --- !u!1 &7389421263939396073
 GameObject:
   m_ObjectHideFlags: 0
