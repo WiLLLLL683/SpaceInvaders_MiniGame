@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDelay: 1.5
   MoveDelay: 0.25
-  MoveInversionDelay: 1
+  MoveInversionDelay: 0.5
   MoveInversionLayers:
     serializedVersion: 2
     m_Bits: 256
