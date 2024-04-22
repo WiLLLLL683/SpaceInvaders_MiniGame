@@ -9,6 +9,14 @@ namespace SpaceInvadersMiniGame
     /// </summary>
     public class Dependencies
     {
+        //components from prefab
+        public GameScreen GameScreen;
+        public PlayerInput Input;
+        public AIInput AIInput;
+        //config
+        public MiniGameConfig GameConfig;
+        public PlayerConfig PlayerConfig;
+        public List<LevelConfig> LevelsConfig;
         //factories
         public PlayerFactory PlayerFactory;
         public BulletFactory BulletFactory;
@@ -16,13 +24,5 @@ namespace SpaceInvadersMiniGame
         public ExplosionFactory ExplosionFactory;
         //persistent data
         public MiniGameData GameData;
-        public EnemiesData EnemiesData;
-        //components from prefab
-        public GameScreen GameScreen;
-        public PlayerInput Input;
-        //config
-        public MiniGameConfig GameConfig;
-        public PlayerConfig PlayerConfig;
-        public List<LevelConfig> LevelsConfig;
     }
 }

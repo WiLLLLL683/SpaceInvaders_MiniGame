@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DelayAfterSpawn: 0.25
   ExplosionPrefab: {fileID: -5485733128859038139, guid: 9dd5fd5c723703a4ab609407032b33ba, type: 3}
+  AiConfig:
+    AttackDelay: 1.5
+    MoveDelay: 0.25
+    MoveInversionDelay: 1
+    BoundLayers:
+      serializedVersion: 2
+      m_Bits: 256

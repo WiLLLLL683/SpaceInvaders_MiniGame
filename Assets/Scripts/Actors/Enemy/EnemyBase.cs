@@ -9,8 +9,12 @@ namespace SpaceInvadersMiniGame
     {
         public abstract event Action<IKillable> OnKilled;
 
+        public abstract bool IsAbleToAttack { get; }
+
+        public abstract void Move(Vector2 direction);
+        public abstract void Attack();
         public abstract void Kill();
-        public abstract void Init(EnemyConfig config, EnemiesData enemiesData, BulletFactory bulletFactory);
+        public abstract void Init(EnemyConfig config, BulletFactory bulletFactory);
         public abstract void TakeDamage(int damage);
     }
 }

@@ -6,13 +6,13 @@ namespace SpaceInvadersMiniGame
 {
     public class EnemyFactory : KillableFactoryBase<EnemyBase>
     {
-        private readonly EnemiesData data;
+        private readonly AIInput input;
         private readonly List<Transform> spawnPoints;
         private readonly BulletFactory bulletFactory;
 
-        public EnemyFactory(EnemiesData data, List<Transform> spawnPoints, Transform parent, BulletFactory bulletFactory)
+        public EnemyFactory(AIInput input, List<Transform> spawnPoints, Transform parent, BulletFactory bulletFactory)
         {
-            this.data = data;
+            this.input = input;
             this.spawnPoints = spawnPoints;
             this.parent = parent;
             this.bulletFactory = bulletFactory;
@@ -34,8 +34,9 @@ namespace SpaceInvadersMiniGame
         public EnemyBase Create(EnemyConfig config, Transform spawnPoint)
         {
             EnemyBase enemy = GameObject.Instantiate(config.Prefab, spawnPoint.position, Quaternion.identity, parent);
-            enemy.Init(config, data, bulletFactory);
+            enemy.Init(config, bulletFactory);
             Register(enemy);
+            input.Register(enemy);
             return enemy;
         }
     }

@@ -22,16 +22,16 @@ namespace SpaceInvadersMiniGame
         {
             //Create persistent data
             cont.GameData = new();
-            cont.EnemiesData = new();
 
             //Create factories
             cont.ExplosionFactory = new(cont.GameScreen.ExplosionParent, cont.GameConfig.ExplosionPrefab);
             cont.BulletFactory = new(cont.GameScreen.BulletParent, cont.ExplosionFactory);
             cont.PlayerFactory = new(cont.GameScreen.PlayerSpawnPoint, cont.GameScreen.PlayerParent, cont.Input, cont.BulletFactory, cont.PlayerConfig);
-            cont.EnemyFactory = new(cont.EnemiesData, cont.GameScreen.EnemySpawnPoints, cont.GameScreen.EnemiesParent, cont.BulletFactory);
+            cont.EnemyFactory = new(cont.AIInput, cont.GameScreen.EnemySpawnPoints, cont.GameScreen.EnemiesParent, cont.BulletFactory);
 
-            //Init UI
+            //Init prefab components 
             cont.GameScreen.Init(cont.Input);
+            cont.AIInput.Init(cont.GameConfig.AiConfig);
 
             //=>
             stateMachine.EnterState<StartGameState>();

@@ -11,6 +11,7 @@ namespace SpaceInvadersMiniGame
         [Header("Components")]
         [SerializeField] private GameScreen gameScreen;
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private AIInput aiInput;
         [Header("Config")]
         [SerializeField] private MiniGameConfig gameConfig;
         [SerializeField] private PlayerConfig playerConfig;
@@ -28,6 +29,7 @@ namespace SpaceInvadersMiniGame
             {
                 GameScreen = gameScreen,
                 Input = playerInput,
+                AIInput = aiInput,
                 GameConfig = gameConfig,
                 PlayerConfig = playerConfig,
                 LevelsConfig = levels

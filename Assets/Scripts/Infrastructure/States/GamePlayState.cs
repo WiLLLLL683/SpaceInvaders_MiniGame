@@ -36,6 +36,7 @@ namespace SpaceInvadersMiniGame
 
             //Enable input
             cont.Input.Enable();
+            cont.AIInput.Enable();
 
             //=>
             cont.PlayerFactory.OnClear += stateMachine.EnterState<LoseState>;
@@ -47,16 +48,14 @@ namespace SpaceInvadersMiniGame
             cont.PlayerFactory.OnClear -= stateMachine.EnterState<LoseState>;
             cont.EnemyFactory.OnClear -= stateMachine.EnterState<LevelClearedState>;
 
-            //Disable input
-            cont.Input.Disable();
-
-            //Reset per-level data
-            cont.EnemiesData.Reset();
-
             //Clear actors
             cont.EnemyFactory.Clear();
             cont.PlayerFactory.Clear();
             cont.BulletFactory.Clear();
+
+            //Disable input
+            cont.Input.Disable();
+            cont.AIInput.Disable();
         }
     }
 }
