@@ -13,6 +13,7 @@ namespace SpaceInvadersMiniGame
         public PlayerFactory PlayerFactory;
         public BulletFactory BulletFactory;
         public EnemyFactory EnemyFactory;
+        public ExplosionFactory ExplosionFactory;
         //persistent data
         public MiniGameData GameData;
         public EnemiesData EnemiesData;

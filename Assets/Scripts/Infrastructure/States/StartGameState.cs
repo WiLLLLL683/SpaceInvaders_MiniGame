@@ -20,6 +20,9 @@ namespace SpaceInvadersMiniGame
             //Reset per-game data
             cont.GameData.Reset();
 
+            //Show UI
+            cont.GameScreen.Show();
+
             //=>
             stateMachine.EnterState<GamePlayState, int>(0);
         }

@@ -146,7 +146,7 @@ TextureImporter:
         width: 25
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: BulletBombSpriteSheetRed_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 38
-        width: 20
-        height: 20
+        x: 35
+        y: 35
+        width: 25
+        height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: BulletBombSpriteSheetRed_2
       rect:
         serializedVersion: 2
-        x: 7
-        y: 8
-        width: 13
-        height: 13
+        x: 3
+        y: 3
+        width: 25
+        height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -203,7 +203,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 13a57699d5fe09a4c8e5702e604ad074
     internalID: 0
     vertices: []
     indices: 

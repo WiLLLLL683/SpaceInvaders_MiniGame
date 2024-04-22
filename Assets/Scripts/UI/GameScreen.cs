@@ -15,6 +15,7 @@ namespace SpaceInvadersMiniGame
         [SerializeField] private Transform playerParent;
         [SerializeField] private Transform enemiesParent;
         [SerializeField] private Transform bulletParent;
+        [SerializeField] private Transform explosionParent;
         [Header("Spawn points")]
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private List<Transform> enemySpawnPoints;
@@ -22,25 +23,15 @@ namespace SpaceInvadersMiniGame
         public Transform PlayerParent => playerParent;
         public Transform EnemiesParent => enemiesParent;
         public Transform BulletParent => bulletParent;
+        public Transform ExplosionParent => explosionParent;
         public Transform PlayerSpawnPoint => playerSpawnPoint;
         public List<Transform> EnemySpawnPoints => enemySpawnPoints;
 
-        private MiniGame miniGame;
         private PlayerInput input;
 
-        public void Init(MiniGame miniGame, PlayerInput input)
+        public void Init(PlayerInput input)
         {
-            this.miniGame = miniGame;
             this.input = input;
-
-            miniGame.OnEnable += Show;
-            miniGame.OnDisable += Hide;
-        }
-
-        private void OnDestroy()
-        {
-            miniGame.OnEnable -= Show;
-            miniGame.OnDisable -= Hide;
         }
 
         public void Show()

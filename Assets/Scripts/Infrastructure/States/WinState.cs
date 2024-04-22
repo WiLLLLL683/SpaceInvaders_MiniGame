@@ -19,6 +19,7 @@ namespace SpaceInvadersMiniGame
         public void OnEnter()
         {
             //=>
+            cont.GameScreen.Hide();
             owner.Disable();
         }
 
