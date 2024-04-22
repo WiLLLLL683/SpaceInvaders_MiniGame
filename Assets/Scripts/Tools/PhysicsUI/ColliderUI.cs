@@ -113,7 +113,19 @@ namespace CustomUIPhysics
                 }
             }
 
+            ClearNullCollisions();
             return isColliding;
+        }
+
+        private void ClearNullCollisions()
+        {
+            for (int i = 0; i < collisions.Count; i++)
+            {
+                if (collisions[i] == null)
+                {
+                    collisions.RemoveAt(i);
+                }
+            }
         }
     }
 }

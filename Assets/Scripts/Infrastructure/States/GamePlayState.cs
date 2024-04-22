@@ -11,9 +11,9 @@ namespace SpaceInvadersMiniGame
     {
         private readonly MiniGame owner;
         private readonly StateMachine stateMachine;
-        private readonly Dependencies cont;
+        private readonly Container cont;
 
-        public GamePlayState(MiniGame owner, StateMachine stateMachine, Dependencies cont)
+        public GamePlayState(MiniGame owner, StateMachine stateMachine, Container cont)
         {
             this.owner = owner;
             this.stateMachine = stateMachine;
@@ -36,6 +36,7 @@ namespace SpaceInvadersMiniGame
 
             //Enable input
             cont.Input.Enable();
+            cont.EnemyAI.Enable();
 
             //=>
             cont.PlayerFactory.OnClear += stateMachine.EnterState<LoseState>;
@@ -47,16 +48,14 @@ namespace SpaceInvadersMiniGame
             cont.PlayerFactory.OnClear -= stateMachine.EnterState<LoseState>;
             cont.EnemyFactory.OnClear -= stateMachine.EnterState<LevelClearedState>;
 
-            //Disable input
-            cont.Input.Disable();
-
-            //Reset per-level data
-            cont.EnemiesData.Reset();
-
             //Clear actors
             cont.EnemyFactory.Clear();
             cont.PlayerFactory.Clear();
             cont.BulletFactory.Clear();
+
+            //Disable input
+            cont.Input.Disable();
+            cont.EnemyAI.Disable();
         }
     }
 }

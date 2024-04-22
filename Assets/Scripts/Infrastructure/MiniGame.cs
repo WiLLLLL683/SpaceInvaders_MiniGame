@@ -11,16 +11,18 @@ namespace SpaceInvadersMiniGame
         [Header("Components")]
         [SerializeField] private GameScreen gameScreen;
         [SerializeField] private PlayerInput playerInput;
+        [SerializeField] private EnemyAI enemyAI;
         [Header("Config")]
         [SerializeField] private MiniGameConfig gameConfig;
         [SerializeField] private PlayerConfig playerConfig;
+        [SerializeField] private EnemyAIConfig enemyAIConfig;
         [SerializeField] private List<LevelConfig> levels = new();
 
         public event Action OnEnable;
         public event Action OnDisable;
 
         private StateMachine stateMachine;
-        private Dependencies container;
+        private Container container;
 
         public void Enable()
         {
@@ -28,8 +30,10 @@ namespace SpaceInvadersMiniGame
             {
                 GameScreen = gameScreen,
                 Input = playerInput,
+                EnemyAI = enemyAI,
                 GameConfig = gameConfig,
                 PlayerConfig = playerConfig,
+                EnemyAIConfig = enemyAIConfig,
                 LevelsConfig = levels
             };
 

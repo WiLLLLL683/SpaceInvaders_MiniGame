@@ -8,43 +8,38 @@ namespace SpaceInvadersMiniGame
     {
         [Header("Components")]
         [SerializeField] private ColliderUI colliderUI;
+        [SerializeField] private ColliderUI frontColliderUI;
         [SerializeField] private Transform gunPoint;
 
+        public override bool IsAbleToAttack => !frontColliderUI.HaveCollisions;
         public override event Action<IKillable> OnKilled;
 
-        private IAiComponent ai;
         private IMovementComponent movement;
         private IAttackComponent attack;
         private IHealthComponent health;
+
         private EnemyConfig config;
 
-        public override void Init(EnemyConfig config, EnemiesData data, BulletFactory bulletFactory)
+        public override void Init(EnemyConfig config, BulletFactory bulletFactory)
         {
             this.config = config;
 
-            ai = new BasicAI(data, this, colliderUI, config.AI);
             movement = new StepMovement(transform, config.Movement);
             attack = new AttackWithCoolDown(bulletFactory, gunPoint, config.Attack);
             health = new BasicHealth(config.Health.MaxHealth);
 
-            ai.OnAttack += attack.Attack;
-            ai.OnMove += movement.Move;
             health.OnDeath += Kill;
             colliderUI.OnCollisionEnter += DealDamage;
-
-            ai.Enable();
         }
 
         private void OnDestroy()
         {
-            ai.Disable();
-
-            ai.OnAttack -= attack.Attack;
-            ai.OnMove -= movement.Move;
             health.OnDeath -= Kill;
             colliderUI.OnCollisionEnter -= DealDamage;
         }
 
+        public override void Move(Vector2 direction) => movement.Move(direction);
+        public override void Attack() => attack.Attack();
         public override void TakeDamage(int damage) => health.TakeDamage(damage);
 
         public override void Kill()

@@ -16,20 +16,12 @@ MonoBehaviour:
   Health:
     MaxHealth: 1
   Movement:
-    Speed: {x: 50, y: 100}
-    MaxDeltaPosition: 100
-    Delay: 0
+    Speed: {x: 15, y: 25}
+    MaxDeltaPosition: 25
   Attack:
     BulletPrefab: {fileID: 8745659773723233135, guid: 9eb7337462cc34244968ebf92dd80346, type: 3}
-    BulletSpeed: 500
-    BulletMaxDeltaPosition: 100
+    BulletSpeed: 250
+    BulletMaxDeltaPosition: 50
     CoolDown: 0
     Damage: 1
     Direction: {x: 0, y: -1}
-  AI:
-    AttackDelay: 5
-    MoveDelay: 0.5
-    MoveInversionDelay: 1
-    BoundLayers:
-      serializedVersion: 2
-      m_Bits: 256

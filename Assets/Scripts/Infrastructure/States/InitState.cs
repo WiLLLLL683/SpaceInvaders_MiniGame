@@ -9,9 +9,9 @@ namespace SpaceInvadersMiniGame
     {
         private readonly MiniGame owner;
         private readonly StateMachine stateMachine;
-        private readonly Dependencies cont;
+        private readonly Container cont;
 
-        public InitState(MiniGame owner, StateMachine stateMachine, Dependencies cont)
+        public InitState(MiniGame owner, StateMachine stateMachine, Container cont)
         {
             this.owner = owner;
             this.stateMachine = stateMachine;
@@ -22,16 +22,16 @@ namespace SpaceInvadersMiniGame
         {
             //Create persistent data
             cont.GameData = new();
-            cont.EnemiesData = new();
 
             //Create factories
             cont.ExplosionFactory = new(cont.GameScreen.ExplosionParent, cont.GameConfig.ExplosionPrefab);
             cont.BulletFactory = new(cont.GameScreen.BulletParent, cont.ExplosionFactory);
             cont.PlayerFactory = new(cont.GameScreen.PlayerSpawnPoint, cont.GameScreen.PlayerParent, cont.Input, cont.BulletFactory, cont.PlayerConfig);
-            cont.EnemyFactory = new(cont.EnemiesData, cont.GameScreen.EnemySpawnPoints, cont.GameScreen.EnemiesParent, cont.BulletFactory);
+            cont.EnemyFactory = new(cont.EnemyAI, cont.GameScreen.EnemySpawnPoints, cont.GameScreen.EnemiesParent, cont.BulletFactory);
 
-            //Init UI
+            //Init prefab components 
             cont.GameScreen.Init(cont.Input);
+            cont.EnemyAI.Init(cont.EnemyAIConfig);
 
             //=>
             stateMachine.EnterState<StartGameState>();
