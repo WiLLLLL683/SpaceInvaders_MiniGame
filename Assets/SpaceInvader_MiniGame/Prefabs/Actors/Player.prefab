@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isKinematic: 0
   collisionThrowBack: 1
-  smoothTime: 0.05
+  smoothTime: 0.15
   maxSpeed: 5000
 --- !u!114 &-6579217176014742694
 MonoBehaviour:

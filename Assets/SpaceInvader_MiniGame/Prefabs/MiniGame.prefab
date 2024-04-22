@@ -386,14 +386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 1989063269207876875, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1989063269207876875, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2407880332965010798, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1200
@@ -448,14 +440,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2438622339836784348, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3747084626848968290, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3747084626848968290, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
