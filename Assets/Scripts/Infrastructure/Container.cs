@@ -7,15 +7,16 @@ namespace SpaceInvadersMiniGame
     /// Used in MiniGame class and state machine only.
     /// TODO change to proper DIContainer.
     /// </summary>
-    public class Dependencies
+    public class Container
     {
         //components from prefab
         public GameScreen GameScreen;
         public PlayerInput Input;
-        public AIInput AIInput;
+        public EnemyAI EnemyAI;
         //config
         public MiniGameConfig GameConfig;
         public PlayerConfig PlayerConfig;
+        public EnemyAIConfig EnemyAIConfig;
         public List<LevelConfig> LevelsConfig;
         //factories
         public PlayerFactory PlayerFactory;

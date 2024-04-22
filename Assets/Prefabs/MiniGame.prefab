@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7361102314032641848}
   - component: {fileID: 8135538014231985409}
   m_Layer: 5
-  m_Name: AIInput
+  m_Name: EnemyAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3470010160217112369}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9db43abf294b2114c982d84ed3510066, type: 3}
+  m_Script: {fileID: 11500000, guid: 3403d8a74715bb94691bc59bf00c197c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3639367719055302400
@@ -153,13 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScreen: {fileID: 4587188658141575923}
   playerInput: {fileID: 3117525348120762010}
-  aiInput: {fileID: 8135538014231985409}
+  enemyAI: {fileID: 8135538014231985409}
   gameConfig: {fileID: 11400000, guid: dd402950c2ff5c740b7d42800f12a349, type: 2}
   playerConfig: {fileID: 11400000, guid: 38980a485a7ceac4987269640f9af164, type: 2}
+  enemyAIConfig: {fileID: 11400000, guid: 873fdec12a93d5d41a684706d165eff8, type: 2}
   levels:
-  - {fileID: 11400000, guid: 582665b0fca7ae049b627554bd1d59a3, type: 2}
   - {fileID: 11400000, guid: 63e5453d28953114299881d67ffb7ac5, type: 2}
   - {fileID: 11400000, guid: 5fa893c8ac9aeb841b9190e3f67b73a2, type: 2}
+  - {fileID: 11400000, guid: 582665b0fca7ae049b627554bd1d59a3, type: 2}
 --- !u!1 &7389421263939396073
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 1017382742706975648, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
       propertyPath: m_Name
       value: GameScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3934790694893813712, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}
+      propertyPath: m_fontSize
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 188ede4c2c0569841b48143ba2a4bbb6, type: 3}

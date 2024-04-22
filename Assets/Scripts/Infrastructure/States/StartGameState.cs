@@ -6,9 +6,9 @@ namespace SpaceInvadersMiniGame
     {
         private readonly MiniGame owner;
         private readonly StateMachine stateMachine;
-        private readonly Dependencies cont;
+        private readonly Container cont;
 
-        public StartGameState(MiniGame owner, StateMachine stateMachine, Dependencies cont)
+        public StartGameState(MiniGame owner, StateMachine stateMachine, Container cont)
         {
             this.owner = owner;
             this.stateMachine = stateMachine;

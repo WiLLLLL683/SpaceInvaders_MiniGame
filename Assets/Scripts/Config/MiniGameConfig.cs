@@ -9,6 +9,5 @@ namespace SpaceInvadersMiniGame
     {
         public float DelayAfterSpawn;
         public Explosion ExplosionPrefab;
-        public AIConfig AiConfig;
     }
 }

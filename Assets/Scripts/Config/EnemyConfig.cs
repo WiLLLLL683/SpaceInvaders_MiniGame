@@ -10,6 +10,5 @@ namespace SpaceInvadersMiniGame
         public HealthConfig Health;
         public MovementConfig Movement;
         public AttackConfig Attack;
-        public AIConfig AI;
     }
 }

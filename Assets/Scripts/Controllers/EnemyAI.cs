@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class AIInput : MonoBehaviour
+    public class EnemyAI : MonoBehaviour
     {
-        private AIConfig config;
+        private EnemyAIConfig config;
 
         private Dictionary<EnemyBase, ColliderUI> enemies = new();
         private float moveTimer;
@@ -17,7 +17,7 @@ namespace SpaceInvadersMiniGame
         private float lastChangeTime;
         private bool isEnabled;
 
-        public void Init(AIConfig config)
+        public void Init(EnemyAIConfig config)
         {
             this.config = config;
         }
@@ -56,7 +56,6 @@ namespace SpaceInvadersMiniGame
             enemies.Add(enemy, collider);
             collider.OnCollisionEnter += InvertMoveDirection;
             enemy.OnKilled += DeRegister;
-            Debug.Log("Register");
         }
 
         private void DeRegister(IKillable killable)
@@ -71,7 +70,6 @@ namespace SpaceInvadersMiniGame
 
             enemies[enemy].OnCollisionEnter -= InvertMoveDirection;
             enemies.Remove(enemy);
-            Debug.Log("DeRegister");
         }
 
         private void TryMove()
@@ -114,8 +112,6 @@ namespace SpaceInvadersMiniGame
                 }
             }
 
-            Debug.Log($"ableToAttackCount:{ableToAttack.Count}");
-
             if (ableToAttack.Count == 0)
                 return null;
 
@@ -125,7 +121,7 @@ namespace SpaceInvadersMiniGame
 
         private void InvertMoveDirection(ColliderUI collider)
         {
-            if (!config.BoundLayers.IsInLayerMask(collider.gameObject.layer))
+            if (!config.MoveInversionLayers.IsInLayerMask(collider.gameObject.layer))
                 return;
 
             if (Time.time - lastChangeTime <= config.MoveInversionDelay)
