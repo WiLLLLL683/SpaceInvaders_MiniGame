@@ -6,15 +6,18 @@ namespace SpaceInvadersMiniGame
 {
     public class BulletFactory : KillableFactoryBase<Bullet>
     {
-        public BulletFactory(Transform parent)
+        private readonly ExplosionFactory explosionFactory;
+
+        public BulletFactory(Transform parent, ExplosionFactory explosionFactory)
         {
             this.parent = parent;
+            this.explosionFactory = explosionFactory;
         }
 
         public Bullet Create(AttackConfig config, Vector2 startPosition)
         {
-            Bullet bullet = UnityEngine.Object.Instantiate(config.BulletPrefab, startPosition, Quaternion.identity, parent);
-            bullet.Init(config.Direction, config.BulletSpeed, config.BulletMaxDeltaPosition, config.Damage);
+            Bullet bullet = GameObject.Instantiate(config.BulletPrefab, startPosition, Quaternion.identity, parent);
+            bullet.Init(config.Direction, config.BulletSpeed, config.BulletMaxDeltaPosition, config.Damage, explosionFactory);
             Register(bullet);
             return bullet;
         }

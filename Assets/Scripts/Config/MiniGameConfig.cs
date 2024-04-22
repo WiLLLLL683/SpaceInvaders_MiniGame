@@ -8,5 +8,6 @@ namespace SpaceInvadersMiniGame
     public class MiniGameConfig : ScriptableObject
     {
         public float DelayAfterSpawn;
+        public Explosion ExplosionPrefab;
     }
 }

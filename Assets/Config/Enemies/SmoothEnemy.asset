@@ -18,9 +18,8 @@ MonoBehaviour:
   Movement:
     Speed: {x: 50, y: 100}
     MaxDeltaPosition: 100
-    Delay: 0
   Attack:
-    BulletPrefab: {fileID: 8745659773723233135, guid: 9eb7337462cc34244968ebf92dd80346, type: 3}
+    BulletPrefab: {fileID: 8745659773723233135, guid: 2e443c3387939df459fbdfef19684283, type: 3}
     BulletSpeed: 500
     BulletMaxDeltaPosition: 100
     CoolDown: 0

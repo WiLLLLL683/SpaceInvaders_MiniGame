@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   DelayAfterSpawn: 0.25
+  ExplosionPrefab: {fileID: -5485733128859038139, guid: 9dd5fd5c723703a4ab609407032b33ba, type: 3}

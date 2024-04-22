@@ -14,11 +14,13 @@ namespace SpaceInvadersMiniGame
 
         private Vector2 direction = Vector2.zero;
         private int damage;
+        private ExplosionFactory explosionFactory;
 
-        public void Init(Vector2 direction, float speed, float maxSpeed, int damage)
+        public void Init(Vector2 direction, float speed, float maxSpeed, int damage, ExplosionFactory explosionFactory)
         {
             this.direction = direction;
             this.damage = damage;
+            this.explosionFactory = explosionFactory;
 
             movement = new ContinuousMovement(transform, new() { Speed = new(speed,speed), MaxDeltaPosition = maxSpeed });
 
@@ -48,6 +50,7 @@ namespace SpaceInvadersMiniGame
             if(collider.gameObject.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(damage);
+                explosionFactory.Create(collider.transform.position);
             }
 
             Kill();
