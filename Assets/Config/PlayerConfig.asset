@@ -16,12 +16,12 @@ MonoBehaviour:
   Health:
     MaxHealth: 1
   Movement:
-    Speed: {x: 2500, y: 0}
+    Speed: {x: 1500, y: 0}
     MaxDeltaPosition: 100
   Attack:
     BulletPrefab: {fileID: 8745659773723233135, guid: f6ff0b440d0925b4290a4eb35dc012ed, type: 3}
-    BulletSpeed: 500
-    BulletMaxDeltaPosition: 50
-    CoolDown: 0.5
+    BulletSpeed: 750
+    BulletMaxDeltaPosition: 100
+    CoolDown: 0.7
     Damage: 1
     Direction: {x: 0, y: 1}

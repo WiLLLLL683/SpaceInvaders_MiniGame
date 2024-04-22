@@ -1,7 +1,6 @@
-using SpaceInvadersMiniGame;
 using CustomStateMachine;
-using UnityEngine.Playables;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
@@ -30,6 +29,7 @@ namespace SpaceInvadersMiniGame
             cont.EnemyFactory = new(cont.EnemyAI, cont.GameScreen.EnemySpawnPoints, cont.GameScreen.EnemiesParent, cont.BulletFactory);
 
             //Init prefab components 
+            cont.Input.Init();
             cont.GameScreen.Init(cont.Input);
             cont.EnemyAI.Init(cont.EnemyAIConfig);
 

@@ -12,7 +12,7 @@ namespace SpaceInvadersMiniGame
 
         public InputActions Actions { get; private set; }
 
-        private void Awake()
+        public void Init()
         {
             Actions = new();
         }
