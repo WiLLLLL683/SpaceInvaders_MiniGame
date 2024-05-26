@@ -2,10 +2,14 @@
 
 Mini game module running completely in Unity UI space with Space Invaders-like gameplay.  
 
-Main features:
+<img alt="preview" src="./preview.gif" height="300px" />
+
+#### Main features:
 - Custom physics for UI objects.
 - Easy import into any project, thanks to modular structure.
 - Easy gameplay expansion with more enemies and player behaviors, like movement and attack.
+
+
 
 ## Table of contents
 
@@ -77,27 +81,27 @@ Since this is a mini-game and it should work in any context, the simplest possib
 
 Entry point is `MiniGame` object. It starts the game and configures `StateMachine` to controll game flow.
 Dependencies are resolved manualy in `InitState` and stored between states in simple `Container`.
->You can change game flow by modifying states or creating new one.
+You can change game flow by modifying states or creating new one.
 
 `Factories` create `Actors` and pass dependencies to them. All factories are inherited from generic `FactoryBase` class,
 which registers actors on create and deregisters on actor killed. 
 
 Input is handeled by `PlayerInput` class, which is wrapper over `InputActions`.
->To resieve input you need to subscribe to `PlayerInput` events.
+To resieve input you need to subscribe to `PlayerInput` events.
 
 #### Actors
 
 `Actors` represent the active entities of the game. 
 Each `Actor` is `MonoBehavior` controller that defines and connects `Components` to achieve the required behavior.
 Some `Actors` could be controlled by `Managers`, for example `EnemyAI` coordinates all enemies to achieve synchronous actions.
->To create new `Actor` you need to create new `MonoBehavior` and new `Factory` for that `Actor`.
+To create new `Actor` you need to create new `MonoBehavior` and new `Factory` for that `Actor`.
 
 #### Components
 
 Each `Component` is C# class with implementation of some action, for example Attack or Movement.
 `Components` implement interfaces segregated by type of action. 
 `Components` can be used in any `Actor`.
->To create new `Component` just implement some of existing interfases or create new one.
+To create new `Component` just implement some of existing interfases or create new one.
 
 #### Config
 
@@ -105,13 +109,13 @@ Game configuration is made with `ScriptableObjects`.
 There are separate `ScriptableObjects` for `MiniGame, Player, Levels, Enemies and EnemyAI` with settings and prefabs.
 Settings of each `Component` type are distributed in separate serializable C# classes.
 All configuration files are referensed by `MiniGame` object.
->To create different variants of `Actors` like `Enemies` or `Bullets` you need to create prefab with desired `Actor` script on it and drag it to appropriate `ScriptableObject`.
+To create different variants of `Actors` like `Enemies` or `Bullets` you need to create prefab with desired `Actor` script on it and drag it to appropriate `ScriptableObject`.
 
 #### UI
 
 The whole game takes place on one `GameScreen`. It displays name of the current level and control scheme.
 Also it contains parent transforms and spawn points to spawn `Player` and `Enemies`.
->In case other game screens are created, `GameScreen` class could be reused.
+In case other game screens are created, `GameScreen` class could be reused.
 
 
 
