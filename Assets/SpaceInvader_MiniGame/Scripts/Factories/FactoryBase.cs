@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public abstract class KillableFactoryBase<T> where T : MonoBehaviour, IKillable
+    public abstract class FactoryBase<T> where T : MonoBehaviour, IKillable
     {
         public event Action OnClear;
 

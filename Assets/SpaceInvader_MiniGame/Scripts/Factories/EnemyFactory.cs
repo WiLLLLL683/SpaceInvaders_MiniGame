@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class EnemyFactory : KillableFactoryBase<EnemyBase>
+    public class EnemyFactory : FactoryBase<EnemyBase>
     {
         private readonly EnemyAI enemyAI;
         private readonly List<Transform> spawnPoints;

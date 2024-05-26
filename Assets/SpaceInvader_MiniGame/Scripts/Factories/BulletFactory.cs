@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class BulletFactory : KillableFactoryBase<Bullet>
+    public class BulletFactory : FactoryBase<Bullet>
     {
         private readonly ExplosionFactory explosionFactory;
 

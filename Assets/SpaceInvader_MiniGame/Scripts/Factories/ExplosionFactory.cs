@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SpaceInvadersMiniGame
 {
-    public class ExplosionFactory : KillableFactoryBase<Explosion>
+    public class ExplosionFactory : FactoryBase<Explosion>
     {
         private readonly Explosion prefab;
 
